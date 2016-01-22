@@ -14,6 +14,8 @@
 #import "Items.h"
 #import "UIImageView+WebCache.h"
 #import "MuseumsPictureShow.h"
+#import "MuseumsPictureAndVideo.h"
+#import "UMSocial.h"
 
 
 #define MainURL            @"http://202.121.66.52:8010"
@@ -34,6 +36,7 @@
     NSString *_baidu;
     NSArray *_itemsArray;
     NSArray *imageArray;
+    NSArray *ImageVideoArray;
     
     NSMutableArray *_imageUrlArray;
     NSMutableArray *_titleArray;
@@ -44,6 +47,9 @@
     NSMutableArray *_imageArray4;
     NSMutableArray *_wikiUrl;
     NSMutableArray *_storyArray;
+    NSMutableArray *_contentArray;
+    NSMutableArray *_infoArray;
+    NSMutableArray *_mp3Array;
     
 }
 
@@ -59,11 +65,45 @@
     _imageArray4 = [[NSMutableArray alloc] init];
     _wikiUrl = [[NSMutableArray alloc] init];
     _storyArray = [[NSMutableArray alloc] init];
+    _contentArray = [[NSMutableArray alloc] init];
+    _mp3Array = [[NSMutableArray alloc] init];
+     _infoArray = [[NSMutableArray alloc] init];
      self.mydelegate =(AppDelegate *)[[UIApplication sharedApplication]delegate];
     
     [self getItemsData];
     
     [self.tableView reloadData];
+    //设置右barbutton
+    UIImage *image = [UIImage imageNamed:@"share.png"];
+    UIButton *myCustomButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    myCustomButton.bounds = CGRectMake( 0, 0, image.size.width, image.size.height );
+    [myCustomButton setImage:image forState:UIControlStateNormal];
+    [myCustomButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    UIBarButtonItem *rightbar = [[UIBarButtonItem alloc] initWithCustomView:myCustomButton];
+    
+    self.navigationItem.rightBarButtonItem = rightbar;
+    
+}
+
+-(void)share
+{
+    NSString *shareText = @"nihao";             //分享内嵌文字
+    
+    
+//    NSURL *url = [NSURL URLWithString: _museumscoverImage];
+//    //    UIImage *imagea = [UIImage imageWithData: [NSData dataWithContentsOfURL:url]];
+//    UIImage *shareImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];          //分享内嵌图片
+    //
+    //调用快速分享接口
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:@"55fcee3ce0f55a4ccb006a88"
+                                      shareText:shareText
+                                     shareImage:nil
+                                shareToSnsNames:nil
+                                       delegate:nil];
+    
     
 }
 
@@ -89,6 +129,9 @@
     [_imageArray4 removeAllObjects];
     [_wikiUrl removeAllObjects];
     [_storyArray removeAllObjects];
+    [_contentArray removeAllObjects];
+    [_mp3Array removeAllObjects];
+    [_infoArray removeAllObjects];
 //    NSString *museums = @"items";
     NSString *stringURL = [NSString stringWithFormat:@"%@/%@/%@/%@",MainURL,@"items",@"museum",_ider];
     
@@ -129,7 +172,7 @@
     NSLog(@"%@",signid);
     NSString *description = [object objectForKey:@"description"];
     
-   
+    NSString *content = [object objectForKey:@"info"];
     NSDictionary *imageDic1 = [object objectForKey:@"image"];
     NSString *imageaddress1 = [imageDic1 objectForKey:@"url"];
     NSString *image1 = [NSString stringWithFormat:@"%@%@",MainURL,imageaddress1];
@@ -150,6 +193,15 @@
     NSString *imageaddress4 = [imageDic4 objectForKey:@"url"];
     NSString *image4 = [NSString stringWithFormat:@"%@%@",MainURL,imageaddress4];
     
+    NSDictionary *voice = [object objectForKey:@"voice"];
+    NSString *voiceUrl = [voice objectForKey:@"url"];
+    NSString *mp3Url = [NSString stringWithFormat:@"%@%@",MainURL,voiceUrl];
+    
+    
+    NSString *contentString = [object objectForKey:@"content"];
+    if ([mp3Url isEqual:[NSNull null]]) {
+        mp3Url = @"http://202.121.66.52:8010/uploads/item/voice/3/___7-____.mp3";
+    }
   
     NSString *story = [object objectForKey:@"story"];
     
@@ -176,7 +228,9 @@
     [_imageArray4 addObject:image4];
     [_wikiUrl addObject:wikiurl];
     [_storyArray addObject:story];
-    
+    [_infoArray addObject:content];
+    [_mp3Array addObject:mp3Url];
+    [_contentArray addObject:contentString];
     
     NSString *items = @"Items";
     NSArray *signarray = [self getdatafromCoreData:items];
@@ -272,7 +326,7 @@
     }
 
     [self configureCell:cell forIndexPath:indexPath];
-     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
@@ -284,13 +338,20 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"TableViewCell";
+    DiyCellBase *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
-    MuseumsPictureShow *pictureShow = [[MuseumsPictureShow alloc] initWithNibName:nil bundle:nil];
+    NSString *titl = cell.title.text;
+    NSLog(@"====%@",titl);
 //    Items *item = _itemsArray[indexPath.row];
     _image1 = _imageArray1[indexPath.row];
     _image2 = _imageArray2[indexPath.row];
     _image3 = _imageArray3[indexPath.row];
     _image4 = _imageArray4[indexPath.row];
+    NSString *title = _titleArray[indexPath.row];
+    NSString *mp3 = _mp3Array[indexPath.row];
+    
+    NSLog(@"%@----",title);
     NSString *iii = @"4";
     
     NSLog(@"%@",_image2);
@@ -326,13 +387,40 @@
          imageArray = @[_image1];
     }
     
- 
+    ImageVideoArray = @[_image1];
     _story = _storyArray[indexPath.row];
+    NSString *info = _infoArray[indexPath.row];
+    NSString *content = _contentArray[indexPath.row];
     _baidu = _wikiUrl[indexPath.row];
 //    NSLog(@"%@==%@==%@==%@==%@",_image1,_image2,_image3,_image4,_story);
-    self.delegate = pictureShow;
-    [self.delegate passimage:imageArray story:_story baidu:_baidu];
-    [self.navigationController pushViewController:pictureShow animated:YES];
+    if ([_ider isEqualToString:@"1"]) {
+        MuseumsPictureShow *pictureShow = [[MuseumsPictureShow alloc] initWithNibName:nil bundle:nil];
+        self.delegate = pictureShow;
+        [self.delegate passimage:imageArray withTitle:title story:_story baidu:_baidu];
+        [UIView transitionWithView:self.navigationController.view duration:0.5 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+            //      UIViewAnimationOptionTransitionCurlUp
+            //        UIViewAnimationOptionTransitionCrossDissolve
+            [self.navigationController pushViewController:pictureShow animated:NO];
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+
+    }else{
+        MuseumsPictureAndVideo *pictureVideo = [[MuseumsPictureAndVideo alloc] initWithNibName:nil bundle:nil];
+        self.delegate = pictureVideo;
+        [self.delegate passimage:ImageVideoArray withTitle:title story:info baidu:_baidu mp3:mp3 content:content];
+        [UIView transitionWithView:self.navigationController.view duration:0.5 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+            //      UIViewAnimationOptionTransitionCurlUp
+            //        UIViewAnimationOptionTransitionCrossDissolve
+            [self.navigationController pushViewController:pictureVideo animated:NO];
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+
+    }
+   
 
 }
 
@@ -351,7 +439,11 @@
 //    }
 
     cell.title.text = _titleArray[indexPath.row];
-    cell.detail.text = _descArray[indexPath.row];
+    
+    NSString *detail = _descArray[indexPath.row];
+//    CGSize size = [detail sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(200,10000.0f)lineBreakMode:UILineBreakModeWordWrap];
+    cell.detail.numberOfLines = 0;
+    cell.detail.text = detail;
     NSString *imagelogo = _imageUrlArray[indexPath.row];
     NSURL *url = [NSURL URLWithString:imagelogo];
     [cell.image sd_setImageWithURL:url];

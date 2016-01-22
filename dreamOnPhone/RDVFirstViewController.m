@@ -35,10 +35,12 @@
 #import "Products.h"
 #import "Eweekly.h"
 #import "DreamOfMuseumShow.h"
-#import "QRCodeReaderViewController.h"
+//#import "QRCodeReaderViewController.h"
 #import "Diycell.h"
 #import "Person+CoreDataProperties.h"
 #import "saoMiaoResultViewController.h"
+#import "Love+CoreDataProperties.h"
+#import "Love.h"
 
 #define MainURL            @"http://202.121.66.52:8010"
 @interface RDVFirstViewController ()
@@ -68,9 +70,15 @@
 
 #pragma mark - View lifecycle
 
+-(void)viewDidAppear:(BOOL)animated
+{
+//    [self showIntroWithSeparatePagesInit];
+
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"梦之园";
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _priceArray = [[NSMutableArray alloc] init];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar
@@ -80,17 +88,17 @@
 //      self.navigationController.navigationBar.tintColor = [UIColor  colorWithRed:67.0/255.0 green:148.0/255.0 blue:247.0/255.0 alpha:1.0];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:67.0/255.0 green:148.0/255.0 blue:247.0/255.0 alpha:1.0];
     self.navigationController.navigationBar.translucent = NO;
-    //设置右barbutton
-    UIImage *image = [UIImage imageNamed:@"scaning.png"];
-    UIButton *myCustomButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    myCustomButton.bounds = CGRectMake( 0, 0, image.size.width, image.size.height );
-    [myCustomButton setImage:image forState:UIControlStateNormal];
-    [myCustomButton addTarget:self action:@selector(photo) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    UIBarButtonItem *rightbar = [[UIBarButtonItem alloc] initWithCustomView:myCustomButton];
-
-    self.navigationItem.rightBarButtonItem = rightbar;
+//    //设置右barbutton
+//    UIImage *image = [UIImage imageNamed:@"Share.png"];
+//    UIButton *myCustomButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    myCustomButton.bounds = CGRectMake( 0, 0, image.size.width, image.size.height );
+//    [myCustomButton setImage:image forState:UIControlStateNormal];
+//    [myCustomButton addTarget:self action:@selector(photo) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    
+//    UIBarButtonItem *rightbar = [[UIBarButtonItem alloc] initWithCustomView:myCustomButton];
+//
+//    self.navigationItem.rightBarButtonItem = rightbar;
     self.mydelegate =(AppDelegate *)[[UIApplication sharedApplication]delegate];
     
     
@@ -136,43 +144,48 @@
    
 }
 
--(void)photo{
-
-static QRCodeReaderViewController *reader = nil;
-static dispatch_once_t onceToken;
-
-dispatch_once(&onceToken, ^{
-    reader                        = [QRCodeReaderViewController new];
-    reader.modalPresentationStyle = UIModalPresentationFormSheet;
-});
-reader.delegate = self;
-[reader setCompletionWithBlock:^(NSString *resultAsString) {
-
-}];
-[self presentViewController:reader animated:YES completion:NULL];
-}
 
 
 
-#pragma mark - QRCodeReader Delegate Methods
 
-- (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
-{
-   
-    [self dismissViewControllerAnimated:YES completion:^{
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"QRCodeReader" message:result delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//        [alert show];
-        _saoMiao = [[saoMiaoResultViewController alloc] init];
-        _saoMiao.saoMiaoResult = result;
-        [self.navigationController pushViewController:_saoMiao animated:YES];
-        NSLog(@"%@",result);
-    }];
-}
-
-- (void)readerDidCancel:(QRCodeReaderViewController *)reader
-{
-    [self dismissViewControllerAnimated:YES completion:NULL];
-}
+//
+//-(void)photo{
+//
+//static QRCodeReaderViewController *reader = nil;
+//static dispatch_once_t onceToken;
+//
+//dispatch_once(&onceToken, ^{
+//    reader                        = [QRCodeReaderViewController new];
+//    reader.modalPresentationStyle = UIModalPresentationFormSheet;
+//});
+//reader.delegate = self;
+//[reader setCompletionWithBlock:^(NSString *resultAsString) {
+//
+//}];
+//[self presentViewController:reader animated:YES completion:NULL];
+//}
+//
+//
+//
+//#pragma mark - QRCodeReader Delegate Methods
+//
+//- (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
+//{
+//   
+//    [self dismissViewControllerAnimated:YES completion:^{
+////        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"QRCodeReader" message:result delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+////        [alert show];
+//        _saoMiao = [[saoMiaoResultViewController alloc] init];
+//        _saoMiao.saoMiaoResult = result;
+//        [self.navigationController pushViewController:_saoMiao animated:YES];
+//        NSLog(@"%@",result);
+//    }];
+//}
+//
+//- (void)readerDidCancel:(QRCodeReaderViewController *)reader
+//{
+//    [self dismissViewControllerAnimated:YES completion:NULL];
+//}
 - (void)loadItems {
     __weak typeof(UITableView *) weakScrollView = self.tableView;
     
@@ -282,7 +295,7 @@ reader.delegate = self;
  */
 -(void)getEweakData
 {
-    NSString *items = @"eweekly";
+    NSString *items = @"eweekly2";
     NSString *stringURL = [NSString stringWithFormat:@"%@/%@",MainURL,items];
     NSLog(@"%@",stringURL);
     NSURL *url = [NSURL URLWithString:[stringURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -389,12 +402,19 @@ reader.delegate = self;
     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
     NSString *price = [numberFormatter stringFromNumber:price1];
     
+    //新增接口数据
+    NSString *tel = [object objectForKey:@"tel"];
+    NSString *opentime =[object objectForKey:@"open_time"];
+    NSLog(@"%@",opentime);
+//    NSString *tel = @"021-888888";
+//    NSString *opentime = @"09:30-16:30";
+    
     if (price == nil || price == NULL) {
         price = @"免费";
     }if ([price isKindOfClass:[NSNull class]]) {
         price = @"免费";
     }
-    [_priceArray addObject:price];
+//    [_priceArray addObject:price];
     NSLog(@"%@",price);
     NSString *museums = @"Museums";
     NSArray *signarray = [self getdatafromCoreData:museums];
@@ -419,6 +439,22 @@ reader.delegate = self;
         [museum setValue:infoimage forKey:@"info_Image"];
         [museum setValue:info forKey:@"info"];
         [museum setValue:feature forKey:@"feature"];
+        //新增数据存储到coredata中
+        if (tel == nil || tel == NULL) {
+            tel = @"---";
+        }if (opentime == nil||opentime == NULL) {
+            opentime= @"---";
+        }
+        if ([tel isKindOfClass:[NSNull class]]) {
+            tel = @"---";
+        } if ([opentime isKindOfClass:[NSNull class]]) {
+            opentime = @"---";
+        }
+        [museum setValue:tel forKey:@"tel"];
+        [museum setValue:opentime forKey:@"opentime"];
+        [museum setValue:price forKey:@"price"];
+        
+        
 //        if (price1 == nil || price1 == NULL) {
 //            price = 0;
 //        }if ([price1 isKindOfClass:[NSNull class]]) {
@@ -518,11 +554,19 @@ reader.delegate = self;
     NSNumber *iD = [object objectForKey:@"id"];
     NSString *signid = [[NSString alloc]initWithFormat:@"%@",iD];
     NSLog(@"%@",signid);
-    NSString *cover = [object objectForKey:@"cover"];
-    NSLog(@"%@",cover);
+    
+    
+    
+    NSDictionary *cover = [object objectForKey:@"cover"];
+    NSString *coverurl = [cover objectForKey:@"url"];
+    NSDictionary *logo = [cover objectForKey:@"logo"];
+    NSString *coverlogo = [logo objectForKey:@"url"];
+    
+    
     NSString *url = [object objectForKey:@"url"];
-    NSString *introduction = [object objectForKey:@"introduction"];
-    NSString *date = [object objectForKey:@"publish_date"];
+    
+//    NSString *introduction = [object objectForKey:@"introduction"];
+//    NSString *date = [object objectForKey:@"publish_date"];
     NSNumber *number1 = [object objectForKey:@"no"];
     NSString *number = [[NSString alloc] initWithFormat:@"%@",number1];
     
@@ -545,9 +589,9 @@ reader.delegate = self;
         
         [items setValue:signid forKey:@"signid"];
         [items setValue:name forKey:@"name"];
-        [items setValue:cover forKey:@"cover"];
-        [items setValue:introduction forKey:@"introduction"];
-        [items setValue:date forKey:@"date"];
+//        [items setValue:cover forKey:@"cover"];
+        [items setValue:coverurl forKey:@"coverurl"];
+        [items setValue:coverlogo forKey:@"coverlogo"];
         [items setValue:url forKey:@"url"];
         [items setValue:number forKey:@"number"];
         
@@ -606,22 +650,73 @@ reader.delegate = self;
         NSString *feature = museumcell.feature;
         [cell.saomiao  setTitle:feature forState:UIControlStateNormal];
     }
-    NSString *imagelogo = museumcell.imageLogo;
+//    
+//    NSString *price = [NSString stringWithFormat:@"%@:%@",@"票价",_priceArray[indexPath.row]];
+//    cell.price.text = price;
+    NSString *imagelogo = museumcell.coverImage;
     NSURL *imageurl = [NSURL URLWithString:imagelogo];
     cell.title.text = museumcell.name;
     cell.detail.text = museumcell.adress;
+    
+     NSString *price = [NSString stringWithFormat:@"%@:%@",@"票价",museumcell.price];
+     cell.price.text = price;
+   
+    cell.image.contentMode = UIViewContentModeScaleToFill;
     [cell.image sd_setImageWithURL:imageurl];
-    [cell.love addTarget:self action:@selector(shoucang:forIndexPath:) forControlEvents:UIControlEventTouchUpInside];
+//    [cell.love addTarget:self action:@selector(shoucang:indexPath:) forControlEvents:UIControlEventTouchUpInside];
 //    NSLog(@"%@",imageurl);
 //    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
 //    [cell.imageView sd_setImageWithURL:imageurl];
-//    
+//    .
 //    cell.textLabel.text = museumcell.name;
 //    cell.detailTextLabel.text = museumcell.adress;
 
 }
--(void)shoucang:(Diycell *)cell forIndexPath:(NSIndexPath *)indexPath
+-(void)shoucang:(NSIndexPath *)indexPath
 {
+    
+    Museums *museum = _museumArray[indexPath.row];
+    NSString *singleId = museum.signid;
+    NSString *coverImage = museum.coverImage;
+    NSString *name = museum.name;
+    NSString *info = museum.info;
+    NSString *infoImage = museum.info_Image;
+    NSString *tel = museum.tel;
+    NSString *opentime = museum.opentime;
+    NSInteger intId = 0;
+    NSString *museums = @"Love";
+    
+    NSArray *signarray = [self getdatafromCoreData:museums];
+    for (Love *museum in signarray) {
+        if ([museum.ider isEqualToString:singleId]) {
+            intId =1;
+            //            NSLog(@"有重复数据");
+        }
+    }
+    NSLog(@"%ld",(long)intId);
+    if (intId == 0) {
+        //        NSLog(@"此处添加数据");
+        Love *love = (Love *)[NSEntityDescription insertNewObjectForEntityForName:@"Love" inManagedObjectContext:self.mydelegate.managedObjectContext];
+        
+        
+        [love setValue:singleId forKey:@"ider"];
+        [love setValue:name forKey:@"name"];
+        [love setValue:coverImage forKey:@"coverImage"];
+        [love setValue:infoImage forKey:@"infoImage"];
+        [love setValue:info forKey:@"info"];
+        NSString *price = _priceArray[indexPath.row];
+        [love setValue:price forKey:@"price"];
+        
+        
+        NSError* error;
+        BOOL isSaveSuccess=[self.mydelegate.managedObjectContext save:&error];
+        if (!isSaveSuccess) {
+            NSLog(@"Error:%@",error);
+        }else{
+            NSLog(@"Save successful!");
+        }
+    }
+    
 }
 
 #pragma mark - Table view
@@ -665,20 +760,31 @@ reader.delegate = self;
  
     [[self rdv_tabBarController] setTabBarHidden:!self.rdv_tabBarController.tabBarHidden animated:YES];
 //    self.navigationController.tabBarController.tabBar.hidden = YES;
+    NSLog(@"%lu",(unsigned long)_museumArray.count);
     Museums *museum = _museumArray[indexPath.row];
     NSString *singleId = museum.signid;
     NSString *coverImage = museum.coverImage;
     NSString *name = museum.name;
     NSString *info = museum.info;
     NSString *infoImage = museum.info_Image;
-    NSString *price = _priceArray[indexPath.row];
+    NSString *price = museum.price;
+    NSString *address = museum.adress;
+    NSString *tel = museum.tel;
+    NSString *opentime = museum.opentime;
    
 
     NSLog(@"%@",price);
     DreamOfMuseumShow *dreamOfMuseums = [[DreamOfMuseumShow alloc] initWithNibName:nil bundle:nil];
     self.delegate = dreamOfMuseums;
-    [self.delegate passsigleIdToShowView:singleId withname:name andcoverimage:coverImage andInfo:info andInfoImage:infoImage andPrice:price];
-    [self.navigationController pushViewController:dreamOfMuseums animated:YES];
+    [self.delegate passsigleIdToShowView:singleId withname:name andcoverimage:coverImage andInfo:info andInfoImage:infoImage andPrice:price andTel:tel andopenTime:opentime andAddress:address];
+    [UIView transitionWithView:self.navigationController.view duration:0.5 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+        //      UIViewAnimationOptionTransitionCurlUp
+        //        UIViewAnimationOptionTransitionCrossDissolve
+    [self.navigationController pushViewController:dreamOfMuseums animated:NO];
+    } completion:^(BOOL finished) {
+        
+    }];
+    
     
     
 }

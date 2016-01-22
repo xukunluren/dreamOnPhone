@@ -10,4 +10,5 @@
 
 @interface MuseumsPictureShow : UIViewController
 
+@property(strong,nonatomic)UILabel *storyLabel;
 @end

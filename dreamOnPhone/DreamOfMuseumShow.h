@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 
 @protocol passIdToDetailShowDelegate <NSObject>
 
@@ -15,5 +16,10 @@
 @end
 
 @interface DreamOfMuseumShow : UIViewController
+{
+    AppDelegate *mydelegate;
+}
+
+@property(nonatomic,strong)AppDelegate *mydelegate;
 @property(retain,nonatomic) id <passIdToDetailShowDelegate> delegate;
 @end

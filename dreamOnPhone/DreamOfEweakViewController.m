@@ -190,7 +190,7 @@
     [_eweeklyDate removeAllObjects];
     
     
-    NSString *items = @"eweekly";
+    NSString *items = @"eweekly2";
     NSString *stringURL = [NSString stringWithFormat:@"%@/%@",MainURL,items];
     NSLog(@"%@",stringURL);
     NSURL *url = [NSURL URLWithString:[stringURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -230,18 +230,23 @@
     NSNumber *iD = [object objectForKey:@"id"];
     NSString *signid = [[NSString alloc]initWithFormat:@"%@",iD];
     NSLog(@"%@",signid);
-    NSString *cover = [object objectForKey:@"cover"];
-    NSLog(@"%@",cover);
+    NSDictionary *cover = [object objectForKey:@"cover"];
+    NSString *coverurl1 = [cover objectForKey:@"url"];
+    NSString *coverurl = [NSString stringWithFormat:@"%@%@",MainURL,coverurl1];
+    NSDictionary *logo = [cover objectForKey:@"logo"];
+    NSString *coverlogo1 = [logo objectForKey:@"url"];
+    NSString *coverlogo = [NSString stringWithFormat:@"%@%@",MainURL,coverlogo1];
+    
     NSString *url = [object objectForKey:@"url"];
-    NSString *introduction = [object objectForKey:@"introduction"];
-    NSString *date = [object objectForKey:@"publish_date"];
+//    NSString *introduction = [object objectForKey:@"introduction"];
+//    NSString *date = [object objectForKey:@"publish_date"];
     NSNumber *number1 = [object objectForKey:@"no"];
     NSString *number = [[NSString alloc] initWithFormat:@"%@",number1];
     
-    [_eweeklyImage addObject:cover];
+    [_eweeklyImage addObject:coverlogo];
     [_eweeklyTitle addObject:name];
     [_eweeklyNum addObject:number];
-    [_eweeklyDate addObject:date];
+//    [_eweeklyDate addObject:cove];
 //    NSString *items = @"Eweekly";
 //    NSArray *signarray = [self getdatafromCoreData:items];
 //    for (Products *items in signarray) {

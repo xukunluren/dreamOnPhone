@@ -19,5 +19,7 @@
 @property (nonatomic, retain) NSString * introduction;
 @property (nonatomic, retain) NSString * url;
 @property (nonatomic, retain) NSString * date;
+@property (nonatomic, retain) NSString * coverurl;
+@property (nonatomic, retain) NSString * coverlogo;
 
 @end

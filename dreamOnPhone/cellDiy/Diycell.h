@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *detail;
 @property (weak, nonatomic) IBOutlet UIButton *button;
 @property (strong, nonatomic) IBOutlet UIButton *love;
+@property (weak, nonatomic) IBOutlet UILabel *price;
 
 - (IBAction)love:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *saomiao;

@@ -12,7 +12,11 @@
 
 @protocol passvalueDelegate <NSObject>
 
--(void)passimage:(NSArray *)imagearray story:(NSString *)story baidu:(NSString *)baidu;
+@optional
+-(void)passimage:(NSArray *)imagearray withTitle:(NSString *)title story:(NSString *)story baidu:(NSString *)baidu;
+
+@optional
+-(void)passimage:(NSArray *)imagearray withTitle:(NSString *)title story:(NSString *)story baidu:(NSString *)baidu mp3:(NSString *)mp3Url content:(NSString *)content;
 
 @end
 

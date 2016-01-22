@@ -18,5 +18,7 @@
 @dynamic introduction;
 @dynamic url;
 @dynamic date;
+@dynamic coverurl;
+@dynamic coverlogo;
 
 @end

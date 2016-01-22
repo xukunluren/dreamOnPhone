@@ -9,18 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
 @interface Museums : NSManagedObject
 
-@property (nonatomic, retain) NSString * adress;
-@property (nonatomic, retain) NSString * coverImage;
-@property (nonatomic, retain) NSString * feature;
-@property (nonatomic, retain) NSString * signid;
-@property (nonatomic, retain) NSString * imageLogo;
-@property (nonatomic, retain) NSString * imageUrl;
-@property (nonatomic, retain) NSString * info;
-@property (nonatomic, retain) NSString * info_Image;
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSNumber * price;
+// Insert code here to declare functionality of your managed object subclass
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "Museums+CoreDataProperties.h"

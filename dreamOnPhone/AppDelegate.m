@@ -15,35 +15,83 @@
 #import "DreamOfEweakViewController.h"
 #import "RDVFirthViewController.h"
 #import "DreamOfEweeklyViewController.h"
-//#import "UMSocial.h"
+#import "UMSocial.h"
 #import "NTViewController.h"
 #import "DreamViewController.h"
-#import "QRCodeReaderViewController.h"
+//#import "QRCodeReaderViewController.h"
 #import "saoMiaoResultViewController.h"
 #import "saoyisaoViewController.h"
+#import "UMSocialWechatHandler.h"
+#import "Scan_VC.h"
+#import "yidaoViewController.h"
+#import "CoreNewFeatureVC.h"
+//#import "rootViewController.h"
+#import "EweeklyViewController.h"
 
 
 @interface AppDelegate ()
-
+@property(nonatomic,strong)Scan_VC *saomian;
 @end
 
 @implementation AppDelegate
 {
- saoMiaoResultViewController *_saoMiao;
+// saoMiaoResultViewController *_saoMiao;
+    UITabBarController *tabBarController;
+//    Scan_VC *saomian;
 }
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     
-//    [UMSocialData setAppKey:@"55fcee3ce0f55a4ccb006a88"];
+    [UMSocialData setAppKey:@"55fcee3ce0f55a4ccb006a88"];
+    
+    
+    [UMSocialWechatHandler setWXAppId:@"wxd930ea5d5a258f4f" appSecret:@"db426a9829e4b49a0dcac7b4162da6b6" url:@"http://www.umeng.com/social"];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     self.window.backgroundColor = [UIColor whiteColor];
-    
+//    [self judgeFirstOpenApp];
 
+    //判断是否需要显示：（内部已经考虑版本及本地版本缓存）
+    BOOL canShow = [CoreNewFeatureVC canShowNewFeature];
     
-    UITabBarController *tabBarController = [[UITabBarController alloc]init];
+    //测试代码，正式版本应该删除
+    canShow = YES;
+    
+    if(canShow){
+        
+        NewFeatureModel *m1 = [NewFeatureModel model:[UIImage imageNamed:@"f1"]];
+        
+        NewFeatureModel *m2 = [NewFeatureModel model:[UIImage imageNamed:@"f2"]];
+        
+        NewFeatureModel *m3 = [NewFeatureModel model:[UIImage imageNamed:@"f3"]];
+        
+        self.window.rootViewController = [CoreNewFeatureVC newFeatureVCWithModels:@[m1,m2,m3] enterBlock:^{
+            
+            NSLog(@"进入主页面");
+           [self setMainView];
+        }];
+    }else{
+        
+        [self setMainView];
+    }
+    
+    
+    
+     [self.window makeKeyAndVisible];
+//    [self customizeInterface];
+    
+    return YES;
    
+}
+
+
+-(void)setMainView
+{
+     tabBarController = [[UITabBarController alloc]init];
+    
     //用于设置字体的问题（颜色和大小等）
     [[UITabBarItem appearance] setTitleTextAttributes:@{UITextAttributeFont : [UIFont systemFontOfSize:12],UITextAttributeTextColor : [UIColor whiteColor]} forState:UIControlStateNormal];
     
@@ -51,28 +99,31 @@
     
     
     RDVFirstViewController *wind = [[RDVFirstViewController alloc]init];
-//    wind.navigationController.navigationBar.backgroundColor = [UIColor  colorWithRed:67.0/255.0 green:148.0/255.0 blue:247.0/255.0 alpha:1.0];
-//  wind.navigationController.navigationBar.barTintColor = [UIColor  colorWithRed:67.0/255.0 green:148.0/255.0 blue:247.0/255.0 alpha:1.0];
+    //    wind.navigationController.navigationBar.backgroundColor = [UIColor  colorWithRed:67.0/255.0 green:148.0/255.0 blue:247.0/255.0 alpha:1.0];
+    //  wind.navigationController.navigationBar.barTintColor = [UIColor  colorWithRed:67.0/255.0 green:148.0/255.0 blue:247.0/255.0 alpha:1.0];
     //可用于解决图片灰色问题
     wind.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"梦之园" image:[[UIImage imageNamed:@"home.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"home.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    saoyisaoViewController *viewController = [[UIViewController alloc] init];
-    viewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"扫一扫" image:[[UIImage imageNamed:@"scaning.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"scaning.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
-    QRCodeReaderViewController *photoq = [[QRCodeReaderViewController alloc] init];
-    photoq.delegate = self;
-    photoq.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"扫一扫" image:[[UIImage imageNamed:@"scaning.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"scaning.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-//    DreamOfLifeViewController *wave = [[DreamOfLifeViewController alloc]init];
-//    //可用于解决图片灰色问题
-//    wave.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"梦生命" image:[[UIImage imageNamed:@"plant.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"plant.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+   self.saomian = [[Scan_VC alloc] init];
+    self.saomian.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"扫一扫" image:[[UIImage imageNamed:@"scaning.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"scaning.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    
+//    QRCodeReaderViewController *photoq = [[QRCodeReaderViewController alloc] init];
+//    //    photoq.delegate = self;
+//    photoq.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"扫一扫" image:[[UIImage imageNamed:@"scaning.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"scaning.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    //    DreamOfLifeViewController *wave = [[DreamOfLifeViewController alloc]init];
+    //    //可用于解决图片灰色问题
+    //    wave.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"梦生命" image:[[UIImage imageNamed:@"plant.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"plant.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
     DreamOfProductViewController *flow = [[DreamOfProductViewController alloc]init];
     //可用于解决图片灰色问题
     flow.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"梦生活" image:[[UIImage imageNamed:@"shopping.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"shopping.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
-//    DreamOfEweakViewController *four = [[DreamOfEweakViewController alloc]init];
+    //    DreamOfEweakViewController *four = [[DreamOfEweakViewController alloc]init];
     
     
-    DreamViewController *four = [[DreamViewController alloc] init];
+//    DreamViewController *four = [[DreamViewController alloc] init];
+//    rootViewController *four = [[rootViewController alloc] init];
+    EweeklyViewController *four = [[EweeklyViewController alloc] init];
     //可用于解决图片灰色问题
     four.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"E周刊" image:[[UIImage imageNamed:@"eweekly.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"eweekly.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
@@ -86,17 +137,17 @@
     
     [tabBarController addChildViewController:navFrist];
     
-//    UINavigationController *navSecond = [[UINavigationController alloc]initWithRootViewController:wave];
-//    //    navSecond.navigationBar.backgroundColor = BarColor;
-//    [tabBarController addChildViewController:navSecond];
+    //    UINavigationController *navSecond = [[UINavigationController alloc]initWithRootViewController:wave];
+    //    //    navSecond.navigationBar.backgroundColor = BarColor;
+    //    [tabBarController addChildViewController:navSecond];
     
     UINavigationController *navThrid = [[UINavigationController alloc]initWithRootViewController:flow];
     //    navThrid.navigationBar.backgroundColor = BarColor;
     [tabBarController addChildViewController:navThrid];
     UINavigationController *photo = [[UINavigationController alloc] initWithRootViewController:
-    photoq];
+                                     self.saomian];
     [tabBarController addChildViewController:photo];
-//    UINavigationController *photo = [[UINavigationController alloc] initWithRootViewController:viewController];
+    //    UINavigationController *photo = [[UINavigationController alloc] initWithRootViewController:viewController];
     UINavigationController *navForth = [[UINavigationController alloc]initWithRootViewController:four];
     //    navForth.navigationBar.backgroundColor = BarColor;
     
@@ -106,102 +157,38 @@
     
     //    navFifth.navigationBar.backgroundColor = BarColor;
     [tabBarController addChildViewController:navFifth];
-
-//    [self setupViewControllers];
-//    [self.window setRootViewController:self.viewController];
-    
-//    _NTviewController = [[NTViewController alloc]init];
-    
-    //    UINavigationController * navi = [[UINavigationController alloc]initWithRootViewController:_viewController];
-//     tabBarController.navigationController.navigationBar.barTintColor = [UIColor  colorWithRed:67.0/255.0 green:148.0/255.0 blue:247.0/255.0 alpha:1.0];
     tabBarController.navigationController.navigationBar.backgroundColor = [UIColor  colorWithRed:67.0/255.0 green:148.0/255.0 blue:247.0/255.0 alpha:1.0];
-
+    
     tabBarController.tabBar.barTintColor = [UIColor colorWithRed:67.0/255.0 green:148.0/255.0 blue:247.0/255.0 alpha:1.0];
     [tabBarController.tabBar setShadowImage:[UIImage imageNamed:@"tabarborderimag.png"]];
     self.window.rootViewController = tabBarController;
     
-    [self.window makeKeyAndVisible];
     
-//    [self customizeInterface];
-    
-    return YES;
-   
-    
-//    67 148 247
+    UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
+    btn.backgroundColor=[UIColor  colorWithRed:67.0/255.0 green:148.0/255.0 blue:247.0/255.0 alpha:1];
+    [btn setTintColor:[UIColor colorWithRed:67.0/255.0 green:148.0/255.0 blue:247.0/255.0 alpha:1.0]];
+    btn.frame=CGRectMake(self.window.frame.size.width*0.5-40, self.window.frame.size.height-80, 80, 80);
+    UIImageView *imagview = [[UIImageView alloc] init];
+    imagview.frame = CGRectMake(22.5, 15, 35, 35);
+    UIImage *image = [UIImage imageNamed:@"code.png"];
+    imagview.image = image;
+    [btn addSubview:imagview];
+    btn.center=tabBarController.tabBar.center;
+    btn.layer.cornerRadius = btn.frame.size.width/2.0;
+    btn.layer.borderWidth = 0.5;
+    btn.layer.borderColor = (__bridge CGColorRef _Nullable)([UIColor whiteColor]);
+    btn.layer.masksToBounds = btn.frame.size.width/2.0;
+    [btn addTarget:self action:@selector(click) forControlEvents:UIControlEventTouchUpInside];
+    [tabBarController.view addSubview:btn];
 }
-
-
-
-#pragma mark - QRCodeReader Delegate Methods
-
-- (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
+-(void)click
 {
-    
-    [self.viewController dismissViewControllerAnimated:YES completion:^{
-        _saoMiao = [[saoMiaoResultViewController alloc] init];
-        _saoMiao.saoMiaoResult = result;
-        [self.viewController presentViewController:_saoMiao animated:YES completion:^{
-        }];
-        NSLog(@"%@",result);
-    }];
-}
+    UIViewController *view = tabBarController.viewControllers[2];
+    tabBarController.selectedViewController = view;
 
-- (void)readerDidCancel:(QRCodeReaderViewController *)reader
-{
-    [self.viewController dismissViewControllerAnimated:YES completion:NULL];
 }
 
 
-
-- (void)setupViewControllers {
-    UIViewController *firstViewController = [[RDVFirstViewController alloc] init];
-    UINavigationController *firstNavigationController = [[UINavigationController alloc]
-                                                   initWithRootViewController:firstViewController];
-    
-    UIViewController *secondViewController = [[DreamOfLifeViewController alloc] init];
-    UINavigationController *secondNavigationController = [[UINavigationController alloc]
-                                                    initWithRootViewController:secondViewController];
-    
-    UIViewController *thirdViewController = [[DreamOfProductViewController alloc] init];
-    UINavigationController *thirdNavigationController = [[UINavigationController alloc]
-                                                   initWithRootViewController:thirdViewController];
-    
-    
-    UIViewController *fouthViewController = [[DreamOfEweakViewController alloc] init];
-    UINavigationController *fouthNavigationController = [[UINavigationController alloc]
-                                                   initWithRootViewController:fouthViewController];
-    
-    
-    UIViewController *firthViewController = [[RDVFirthViewController alloc] init];
-    UINavigationController *firthNavigationController = [[UINavigationController alloc]
-                                                   initWithRootViewController:firthViewController];
-    
-    RDVTabBarController *tabBarController = [[RDVTabBarController alloc] init];
-    [tabBarController setViewControllers:@[firstNavigationController, secondNavigationController,
-                                           thirdNavigationController,fouthNavigationController,firthNavigationController]];
-    self.viewController = tabBarController;
-    self.viewController.hidesBottomBarWhenPushed = YES;
-    
-    [self customizeTabBarForController:tabBarController];
-}
-
-- (void)customizeTabBarForController:(RDVTabBarController *)tabBarController {
-    UIImage *finishedImage = [UIImage imageNamed:@"tabbar_selected_background"];
-    UIImage *unfinishedImage = [UIImage imageNamed:@"tabbar_normal_background"];
-    NSArray *tabBarItemImages = @[@"first", @"second", @"third",@"fouth",@"firth"];
-    
-    NSInteger index = 0;
-    for (RDVTabBarItem *item in [[tabBarController tabBar] items]) {
-        [item setBackgroundSelectedImage:finishedImage withUnselectedImage:unfinishedImage];
-        UIImage *selectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_selected",
-                                                      [tabBarItemImages objectAtIndex:index]]];
-        UIImage *unselectedimage = [UIImage imageNamed:[NSString stringWithFormat:@"%@_normal",
-                                                        [tabBarItemImages objectAtIndex:index]]];
-        [item setFinishedSelectedImage:selectedimage withFinishedUnselectedImage:unselectedimage];
-        
-        index++;
-    }
-}
 
 - (void)customizeInterface {
     UINavigationBar *navigationBarAppearance = [UINavigationBar appearance];
@@ -339,5 +326,7 @@
         }
     }
 }
+
+ //
 
 @end

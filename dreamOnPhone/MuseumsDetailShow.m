@@ -9,6 +9,7 @@
 #import "MuseumsDetailShow.h"
 #import "DreamOfMuseumShow.h"
 #import "UIImageView+WebCache.h"
+#import "UMSocial.h"
 
 @interface MuseumsDetailShow ()<passIdToDetailShowDelegate>
 
@@ -34,16 +35,49 @@
     
     [self setUI];
     [self setImageAndFont];
+    //设置右barbutton
+    UIImage *image = [UIImage imageNamed:@"share.png"];
+    UIButton *myCustomButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    myCustomButton.bounds = CGRectMake( 0, 0, image.size.width, image.size.height );
+    [myCustomButton setImage:image forState:UIControlStateNormal];
+    [myCustomButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    UIBarButtonItem *rightbar = [[UIBarButtonItem alloc] initWithCustomView:myCustomButton];
+    
+    self.navigationItem.rightBarButtonItem = rightbar;
+    
+}
+
+-(void)share
+{
+    NSString *shareText = @"nihao";             //分享内嵌文字
+    
+    
+//    NSURL *url = [NSURL URLWithString: _museumscoverImage];
+//    //    UIImage *imagea = [UIImage imageWithData: [NSData dataWithContentsOfURL:url]];
+//    UIImage *shareImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];          //分享内嵌图片
+    //
+    //调用快速分享接口
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:@"55fcee3ce0f55a4ccb006a88"
+                                      shareText:shareText
+                                     shareImage:nil
+                                shareToSnsNames:nil
+                                       delegate:nil];
+    
     
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     self.tabBarController.tabBar.hidden = YES;
+    [self.tabBarController.view subviews].lastObject.hidden = YES;
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
     self.tabBarController.tabBar.hidden = NO;
+    [self.tabBarController.view subviews].lastObject.hidden = NO;
 }
 
 -(void)setUI
@@ -70,9 +104,9 @@
 //    _backimage.contentMode = UIViewContentModeCenter;
 //    [_imageview addSubview:_backimage];
     
-    _imageTitleView = [[UITextView alloc] initWithFrame:CGRectMake(2, imageH,self.view.frame.size.width,25)];
+    _imageTitleView = [[UITextView alloc] initWithFrame:CGRectMake(2, imageH,self.view.frame.size.width,30)];
     _imageTitleView.text = @"展品导航";
-    _imageTitleView.font = [UIFont systemFontOfSize:17];
+    _imageTitleView.font = [UIFont systemFontOfSize:19];
     _imageTitleView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
     _imageTitleView.textColor = [UIColor whiteColor];
     _imageTitleView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
@@ -81,11 +115,11 @@
     
     
     
-    _detailtext = [[UITextView alloc] initWithFrame:CGRectMake(2, imageH+25, self.view.frame.size.width,80)];
+    _detailtext = [[UITextView alloc] initWithFrame:CGRectMake(2, imageH+30, self.view.frame.size.width,80)];
     _detailtext.text = @"nihao";
     _detailtext.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     _detailtext.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
-    _detailtext.font = [UIFont systemFontOfSize:13];
+    _detailtext.font = [UIFont systemFontOfSize:15];
     _detailtext.textColor = [UIColor whiteColor];
     
     [_imageview addSubview:_detailtext];

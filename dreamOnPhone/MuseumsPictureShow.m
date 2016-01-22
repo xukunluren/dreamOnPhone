@@ -10,8 +10,10 @@
 #import "DJPageView.h"
 #import "MuseumExihibit.h"
 #import "TOWebViewController.h"
+#import "Scan_VC.h"
+#import "UMSocial.h"
 
-@interface MuseumsPictureShow ()<passvalueDelegate>
+@interface MuseumsPictureShow ()<passvalueDelegate,passvalueFromSaoMiaoDelegate>
 
 @end
 
@@ -20,6 +22,7 @@
     NSArray *_imageArray;
     NSString *_story;
     NSString *_baiduUrl;
+    
 }
 
 - (void)viewDidLoad {
@@ -27,15 +30,48 @@
 
     
     [self setViewOfPicture];
-
+    //设置右barbutton
+    UIImage *image = [UIImage imageNamed:@"share.png"];
+    UIButton *myCustomButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    myCustomButton.bounds = CGRectMake( 0, 0, image.size.width, image.size.height );
+    [myCustomButton setImage:image forState:UIControlStateNormal];
+    [myCustomButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    UIBarButtonItem *rightbar = [[UIBarButtonItem alloc] initWithCustomView:myCustomButton];
+    
+    self.navigationItem.rightBarButtonItem = rightbar;
+    
 }
 
+-(void)share
+{
+    NSString *shareText = @"nihao";             //分享内嵌文字
+    
+    
+    //    NSURL *url = [NSURL URLWithString: _museumscoverImage];
+    //    //    UIImage *imagea = [UIImage imageWithData: [NSData dataWithContentsOfURL:url]];
+    //    UIImage *shareImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];          //分享内嵌图片
+    //
+    //调用快速分享接口
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:@"55fcee3ce0f55a4ccb006a88"
+                                      shareText:shareText
+                                     shareImage:nil
+                                shareToSnsNames:nil
+                                       delegate:nil];
+    
+    
+}
 -(void)viewWillAppear:(BOOL)animated
 {
     self.tabBarController.tabBar.hidden = YES;
+    [self.tabBarController.view subviews].lastObject.hidden = YES;
 }
 -(void)viewWillDisappear:(BOOL)animated
-{ self.tabBarController.tabBar.hidden = NO;
+{
+    self.tabBarController.tabBar.hidden = NO;
+    [self.tabBarController.view subviews].lastObject.hidden = NO;
 
 }
 
@@ -54,16 +90,35 @@
     pageView.currentPageColor = [UIColor blueColor];
     [self.view addSubview:pageView];
     
-    UILabel *story = [[UILabel alloc] initWithFrame:CGRectMake(15, self.view.frame.size.height*0.45, self.view.frame.size.width-30, self.view.frame.size.height*0.35)];
-    story.text = _story;
-    story.font = [UIFont systemFontOfSize:13.0];
-    story.numberOfLines = 0;
-    [self.view addSubview:story];
+    _storyLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, self.view.frame.size.height*0.4, self.view.frame.size.width-30, self.view.frame.size.height*0.35)];
+//    _storyLabel.text = _story;
+    _storyLabel.font = [UIFont systemFontOfSize:14.0];
+    _storyLabel.numberOfLines = 0;
     
+    NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:_story];
+    //设置字体颜色
+    [text addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, text.length)];
     
-    UIButton *baiduButton = [[UIButton alloc] initWithFrame:CGRectMake(200, self.view.frame.size.height*0.8, 70, 30)];
+    //设置缩进、行距
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    style.headIndent = 0;//缩进
+    style.firstLineHeadIndent = 30;
+    style.lineSpacing = 10;//行距
+    [text addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, text.length)];
+    
+    _storyLabel.attributedText = text;
+    
+    [self.view addSubview:_storyLabel];
+    
+    UIButton *baiduButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    baiduButton.frame = CGRectMake(self.view.frame.size.width*0.8, self.view.frame.size.height*0.8, 70, 30);
     [baiduButton setTitle:@"百度百科" forState:UIControlStateNormal];
-    baiduButton.backgroundColor = [UIColor grayColor];
+    
+//    [baiduButton.layer  setMasksToBounds:YES];
+//    [baiduButton.layer setCornerRadius:10.0f];
+    baiduButton.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    baiduButton.autoresizesSubviews = YES;
+    
     baiduButton.titleLabel.font = [UIFont systemFontOfSize:14];
     [baiduButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [baiduButton addTarget:self action:@selector(openWeb) forControlEvents:UIControlEventTouchUpInside];
@@ -71,13 +126,29 @@
 
 }
 
--(void)passimage:(NSArray *)imagearray story:(NSString *)story baidu:(NSString *)baidu
+
+
+
+//从表格中点击进来展示的代理
+-(void)passimage:(NSArray *)imagearray withTitle:(NSString *)title story:(NSString *)story baidu:(NSString *)baidu
 {
+    NSLog(@"%@",title);
+    self.navigationItem.title = title;
     NSLog(@"%@",imagearray);
     _imageArray = imagearray;
     _story =story;
     _baiduUrl = baidu;
 }
+
+
+//从二维码扫描进入的展品的代理
+-(void)passimageFromSaoMiao:(NSArray *)imagearray story:(NSString *)story baidu:(NSString *)baidu
+{
+    _imageArray = imagearray;
+    _story = story;
+    _baiduUrl = baidu;
+}
+
 
 
 -(void)openWeb{
@@ -91,6 +162,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
+
 
 /*
 #pragma mark - Navigation

@@ -9,7 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @interface DreamViewController : UIViewController <UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+{
+@private
+UIScrollView * mainScrollView;
+//UITableView * _tableView;
+      UIButton * button;
+}
 
-@property(strong,nonatomic)UICollectionView *collectionView;
+//@property(strong,nonatomic)UICollectionView *collectionView;
+@property(strong,nonatomic)UITableView *tableView;
 
 @end

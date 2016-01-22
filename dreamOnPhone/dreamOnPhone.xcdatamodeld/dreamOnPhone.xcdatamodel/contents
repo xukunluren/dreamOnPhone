@@ -3,6 +3,8 @@
     <entity name="Eweekly" representedClassName="Eweekly" syncable="YES">
         <attribute name="attribute" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cover" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="coverlogo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="coverurl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="introduction" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -23,6 +25,17 @@
         <attribute name="story" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="wikiurl" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="Love" representedClassName="Love" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="coverImage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ider" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="info" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="infoImage" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="opentime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tel" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Museums" representedClassName="Museums" syncable="YES">
         <attribute name="adress" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="coverImage" optional="YES" attributeType="String" syncable="YES"/>
@@ -32,8 +45,10 @@
         <attribute name="info" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="info_Image" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="opentime" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="signid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tel" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Person" syncable="YES">
         <attribute name="attribute" optional="YES" attributeType="String" syncable="YES"/>
@@ -56,9 +71,10 @@
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Eweekly" positionX="-36" positionY="9" width="128" height="165"/>
+        <element name="Eweekly" positionX="-36" positionY="9" width="128" height="195"/>
         <element name="Items" positionX="-18" positionY="72" width="128" height="210"/>
-        <element name="Museums" positionX="-63" positionY="-18" width="128" height="195"/>
+        <element name="Love" positionX="-36" positionY="108" width="128" height="180"/>
+        <element name="Museums" positionX="-63" positionY="-18" width="128" height="225"/>
         <element name="Person" positionX="-9" positionY="135" width="128" height="75"/>
         <element name="Plants" positionX="-54" positionY="-9" width="128" height="120"/>
         <element name="Products" positionX="-18" positionY="27" width="128" height="150"/>

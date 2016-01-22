@@ -98,7 +98,7 @@
     _pageControl.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8];
     [self addSubview:_pageControl];
     
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width*0.5-40, self.frame.size.height*0.85, 80, 40)];
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.frame.size.height*0.9, self.frame.size.width, 40)];
     _titleLabel.textColor = [UIColor whiteColor];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.backgroundColor =[UIColor grayColor];
@@ -130,7 +130,7 @@
         }
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i*_scrollView.frame.size.width, 0, _scrollView.frame.size.width, _scrollView.frame.size.height)];
         imageView.userInteractionEnabled = YES;
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        imageView.contentMode = UIViewContentModeScaleToFill;
         imageView.tag = i-1;
         
         // 默认执行SDWebImage的缓存方法

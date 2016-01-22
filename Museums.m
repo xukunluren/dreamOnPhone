@@ -8,18 +8,8 @@
 
 #import "Museums.h"
 
-
 @implementation Museums
 
-@dynamic adress;
-@dynamic coverImage;
-@dynamic feature;
-@dynamic signid;
-@dynamic imageLogo;
-@dynamic imageUrl;
-@dynamic info;
-@dynamic info_Image;
-@dynamic name;
-@dynamic price;
+// Insert code here to add functionality to your managed object subclass
 
 @end

@@ -15,8 +15,9 @@
     
     self.image.layer.cornerRadius = 5;
     self.image.layer.masksToBounds = YES;
-    self.image.layer.borderWidth = 1.0;
+//    self.image.layer.borderWidth = 1.0;
     self.image.layer.borderColor = [UIColor grayColor].CGColor;
+    self.detail.lineBreakMode = UILineBreakModeCharacterWrap;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -12,6 +12,7 @@
 #import "AFNetworking.h"
 #import <CoreData/CoreData.h>
 #import "BWMCoverView.h"
+#import "UMSocial.h"
 
 
 
@@ -31,10 +32,13 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     self.tabBarController.tabBar.hidden = YES;
+    [self.tabBarController.view subviews].lastObject.hidden = YES;
+    
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
     self.tabBarController.tabBar.hidden = NO;
+    [self.tabBarController.view subviews].lastObject.hidden = NO;
 }
 
 - (void)viewDidLoad {
@@ -42,11 +46,42 @@
     _nameArray = [[NSMutableArray alloc] init];
     _imageArray = [[NSMutableArray alloc] init];
     _Array = [[NSMutableArray alloc] init];
-    
+    self.navigationItem.title = @"展品图集";
     [self getItemsData];
 //    [self setPicture];
+    //设置右barbutton
+    UIImage *image = [UIImage imageNamed:@"Share.png"];
+    UIButton *myCustomButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    myCustomButton.bounds = CGRectMake( 0, 0, image.size.width, image.size.height );
+    [myCustomButton setImage:image forState:UIControlStateNormal];
+    [myCustomButton addTarget:self action:@selector(share1) forControlEvents:UIControlEventTouchUpInside];
     
-   }
+    
+    UIBarButtonItem *rightbar = [[UIBarButtonItem alloc] initWithCustomView:myCustomButton];
+    
+    self.navigationItem.rightBarButtonItem = rightbar;
+    
+}
+
+-(void)share1
+{
+    NSString *shareText = @"nihao";             //分享内嵌文字
+    
+    
+    //    NSURL *url = [NSURL URLWithString: _museumscoverImage];
+    //    //    UIImage *imagea = [UIImage imageWithData: [NSData dataWithContentsOfURL:url]];
+    //    UIImage *shareImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];          //分享内嵌图片
+    //
+    //调用快速分享接口
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:@"55fcee3ce0f55a4ccb006a88"
+                                      shareText:shareText
+                                     shareImage:nil
+                                shareToSnsNames:nil
+                                       delegate:nil];
+    
+    
+}
 -(void)setPicture
 {
     NSMutableArray *realArray = [[NSMutableArray alloc] init];
@@ -63,6 +98,7 @@
     _coverView = [BWMCoverView coverViewWithModels:realArray andFrame:self.view.frame andPlaceholderImageNamed:BWMCoverViewDefaultImage andClickdCallBlock:^(NSInteger index) {
         NSLog(@"你点击了第%ld个图片", (long)index);
     }];
+    _coverView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     _coverView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"mountains.png"]];
     [self.view addSubview:_coverView];
     
@@ -74,7 +110,7 @@
     }];
     
     // 请打开下面的东西逐个调试
-    [_coverView setAutoPlayWithDelay:3.0]; // 设置自动播放
+    [_coverView setAutoPlayWithDelay:4.0]; // 设置自动播放
     _coverView.imageViewsContentMode = UIViewContentModeScaleAspectFill; // 图片显示内容模式模式
     
 #warning 修改属性后必须调用updateView方法

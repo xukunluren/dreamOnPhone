@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>map</title>
+	<script type="text/javascript" src="http://202.121.66.52:8010/assets/jquery.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?type=quick&ak=p5F78APWgGaiXKWWEkntEGac&v=1.0"></script>
+</head>
+<body>
+    <div id="allmap"></div>
+
+<style type="text/css">
+	body{padding: 0px;margin: 0px;}
+   #allmap {overflow: hidden;margin:0;}
+    #golist {display: none;}
+    /*@media (max-device-width: 780px){#golist{display: block !important;}}*/
+</style>
+<script>
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+$(function() {
+
+	var id = getParameterByName('id');
+		$("#allmap").height($(window).height());
+		$("#allmap").width($(window).width());
+	
+
+	$.ajax({
+				dataType: 'jsonp',
+				url: "http://202.121.66.52:8010/museums/"+id,
+				success: function(result){
+					console.log(result);
+					var address = result[0].address;
+					var map = new BMap.Map("allmap");
+				    map.addControl(new BMap.ZoomControl());
+				    // 创建地址解析器实例
+				    var myGeo = new BMap.Geocoder();
+				    // 将地址解析结果显示在地图上,并调整地图视野
+
+				    myGeo.getPoint(address, function(point){
+				            if (point) {
+				                map.centerAndZoom(point, 16);
+				                var marker = new BMap.Marker(point);
+				                map.addOverlay(marker);
+				                var opts = {
+				                    width : 200,    // 信息窗口宽度
+				                    height: 70,     // 信息窗口高度
+				                    title : result[0].name, // 信息窗口标题
+				                    enableAutoPan : true //自动平移
+				                }
+				                var infoWindow = new BMap.InfoWindow("地址："+address, opts);  // 创建信息窗口对象
+				                marker.addEventListener("click", function(){
+				                    map.openInfoWindow(infoWindow,point); //开启信息窗口
+				                });
+				            }
+				        }, "上海市");
+				}
+			});
+	 
+	    
+
+		
+
+	  
+
+	
+})
+
+
+</script>
+
+
+</body>
+</html>

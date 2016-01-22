@@ -23,15 +23,16 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
+#import "EAIntroView.h"
 
 
 @protocol passSigleIdToShowViewDelegate <NSObject>
 
--(void)passsigleIdToShowView:(NSString*)sigle withname:(NSString *)name andcoverimage:(NSString *)coverimage andInfo:(NSString *)info andInfoImage:(NSString *)infoImage andPrice:(NSString *)price;
+-(void)passsigleIdToShowView:(NSString*)sigle withname:(NSString *)name andcoverimage:(NSString *)coverimage andInfo:(NSString *)info andInfoImage:(NSString *)infoImage andPrice:(NSString *)price andTel:(NSString *)tel andopenTime:(NSString *)opentime andAddress:(NSString *)address;
 
 @end
 
-@interface RDVFirstViewController : UITableViewController
+@interface RDVFirstViewController : UITableViewController<EAIntroDelegate>
 {
     AppDelegate *mydelegate;
 }

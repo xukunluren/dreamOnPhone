@@ -82,7 +82,6 @@
 		847781411C4DD70900C3188B /* btn_zpdl.png in Resources */ = {isa = PBXBuildFile; fileRef = 847780F11C4DD70900C3188B /* btn_zpdl.png */; };
 		847781421C4DD70900C3188B /* btn_zptj.png in Resources */ = {isa = PBXBuildFile; fileRef = 847780F21C4DD70900C3188B /* btn_zptj.png */; };
 		847781431C4DD70900C3188B /* btn_zxhd.png in Resources */ = {isa = PBXBuildFile; fileRef = 847780F31C4DD70900C3188B /* btn_zxhd.png */; };
-		847781441C4DD70900C3188B /* cover01.png in Resources */ = {isa = PBXBuildFile; fileRef = 847780F41C4DD70900C3188B /* cover01.png */; };
 		847781451C4DD70900C3188B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 847780F51C4DD70900C3188B /* Default-568h@2x.png */; };
 		847781461C4DD70900C3188B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 847780F61C4DD70900C3188B /* Default.png */; };
 		847781471C4DD70900C3188B /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 847780F71C4DD70900C3188B /* Default@2x.png */; };
@@ -430,7 +429,6 @@
 		847780F11C4DD70900C3188B /* btn_zpdl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_zpdl.png; sourceTree = "<group>"; };
 		847780F21C4DD70900C3188B /* btn_zptj.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_zptj.png; sourceTree = "<group>"; };
 		847780F31C4DD70900C3188B /* btn_zxhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_zxhd.png; sourceTree = "<group>"; };
-		847780F41C4DD70900C3188B /* cover01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cover01.png; sourceTree = "<group>"; };
 		847780F51C4DD70900C3188B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		847780F61C4DD70900C3188B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		847780F71C4DD70900C3188B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
@@ -1027,7 +1025,6 @@
 				847780F11C4DD70900C3188B /* btn_zpdl.png */,
 				847780F21C4DD70900C3188B /* btn_zptj.png */,
 				847780F31C4DD70900C3188B /* btn_zxhd.png */,
-				847780F41C4DD70900C3188B /* cover01.png */,
 				847780F51C4DD70900C3188B /* Default-568h@2x.png */,
 				847780F61C4DD70900C3188B /* Default.png */,
 				847780F71C4DD70900C3188B /* Default@2x.png */,
@@ -1710,7 +1707,6 @@
 				8477814A1C4DD70900C3188B /* femalecodertocat@2x.png in Resources */,
 				847781791C4DD70900C3188B /* tabarborderimag.png in Resources */,
 				847781601C4DD70900C3188B /* Left_Arrow_41.png in Resources */,
-				847781441C4DD70900C3188B /* cover01.png in Resources */,
 				847781571C4DD70900C3188B /* fouth_selected@2x.png in Resources */,
 				847781781C4DD70900C3188B /* supportcat@2x.png in Resources */,
 				847781481C4DD70900C3188B /* eweek.jpeg in Resources */,

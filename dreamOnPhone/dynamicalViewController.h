@@ -13,4 +13,6 @@
 
 @property(nonatomic,strong) UITableView *tableView;
 @property(nonatomic,strong) NSString *num;
+@property(nonatomic,strong)NSString *titleString;
+@property(nonatomic,strong)NSString  *tag;
 @end

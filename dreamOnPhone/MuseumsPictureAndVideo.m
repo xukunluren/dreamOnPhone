@@ -12,10 +12,11 @@
 #import "UMSocial.h"
 #import "AXPopoverView.h"
 #import "AXPopoverLabel.h"
+#import "Scan_VC.h"
+#import "UIImageView+WebCache.h"
 
 
-
-@interface MuseumsPictureAndVideo ()<passvalueDelegate>
+@interface MuseumsPictureAndVideo ()<passvalueDelegate,passvalueFromSaoMiaoDelegate>
 @property(strong, nonatomic) AXPopoverView *popoverView;
 @property(strong, nonatomic) AXPopoverLabel *popoverLabel;
 @end
@@ -50,7 +51,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor redColor];
+//    self.view.backgroundColor = [UIColor redColor];
     [self setViewOfUI];
     //设置右barbutton
     UIImage *image = [UIImage imageNamed:@"Share.png"];
@@ -92,7 +93,9 @@
 }
 -(void)share
 {
-    NSString *shareText = @"nihao";             //分享内嵌文字
+    
+    NSString *shareText = [NSString stringWithFormat:@"%@--%@",_title,_stroy];             //分享内嵌文字
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_imageString]]];
     
     
     //    NSURL *url = [NSURL URLWithString: _museumscoverImage];
@@ -103,7 +106,7 @@
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"55fcee3ce0f55a4ccb006a88"
                                       shareText:shareText
-                                     shareImage:nil
+                                     shareImage:image
                                 shareToSnsNames:nil
                                        delegate:nil];
     
@@ -127,7 +130,18 @@
     
     
 }
-
+-(void)passvideoFromSaoMiao:(NSArray *)image withTitle:(NSString *)title mp3:(NSString *)mp3Url content:(NSString *)content story:(NSString *)story
+{
+    _mp3Url = mp3Url;
+    self.navigationItem.title = title;
+    _title = title;
+    //    self.navigationController.title = title;
+    NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"@／：；（）¥「」＂、[]{}#%-*+=_\\|~＜＞$€^•'@#$%^&*()<br />_+'\""];
+    NSString *stroy11 = [story stringByTrimmingCharactersInSet:set];
+    _stroy = [self stringDeleteString:stroy11];
+    _imageString = image.firstObject;
+    _content = content;
+}
 
 -(NSString *) stringDeleteString:(NSString *)str
 {
@@ -153,9 +167,10 @@
     CGFloat imageH = self.view.frame.size.height;
     CGFloat width = self.view.frame.size.width;
     _museumsImageView.frame  = CGRectMake(0, 0, width, imageH);
-    _museumsImageView.backgroundColor = [UIColor redColor];
+//    _museumsImageView.backgroundColor = [UIColor redColor];
     _museumsImageView.layer.masksToBounds = YES;
-    _museumsImageView.image = image111;
+    [_museumsImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"loading.jpg"]];
+//    _museumsImageView.image = image111;
     _museumsImageView.layer.cornerRadius = 5;
     _museumsImageView.contentMode = UIViewContentModeScaleAspectFill;
     _museumsImageView.userInteractionEnabled = YES;
@@ -164,12 +179,15 @@
     
     
     
-    UILabel *story = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height*0.5, self.view.frame.size.width, self.view.frame.size.height*0.25)];
+    UILabel *story = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height*0.55, self.view.frame.size.width, self.view.frame.size.height*0.25)];
 //    story.text = _story;
-    story.font = [UIFont systemFontOfSize:14.0];
+    
+    
+    
+    story.font = [UIFont systemFontOfSize:16.0];
     story.numberOfLines = 4;
     story.backgroundColor = [UIColor blackColor];
-    story.alpha = 0.5;
+    story.alpha = 0.6;
     story.textAlignment = NSTextAlignmentCenter;
     story.text = @"ds";
     story.text = _stroy;
@@ -178,21 +196,21 @@
     
     //建立缓冲进度条
     progress = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
-    progress.frame = CGRectMake(self.view.frame.size.width*0.22,self.view.frame.size.height*0.82,self.view.frame.size.width*0.5, 20);
+    progress.frame = CGRectMake(self.view.frame.size.width*0.22,self.view.frame.size.height*0.85,self.view.frame.size.width*0.5, 20);
     progress.progress = 0;
     [self.view addSubview:progress];
     
     
     
     
-    _button = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width*0.1,self.view.frame.size.height*0.79, 40,40)];
+    _button = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width*0.1,self.view.frame.size.height*0.82, 40,40)];
 //    _button.backgroundColor = [UIColor whiteColor];
     [_button setBackgroundImage:[UIImage imageNamed:@"pause.png"] forState:UIControlStateNormal];
     
     [_button addTarget:self action:@selector(playButton) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_button];
     
-    _moreButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width*0.73,self.view.frame.size.height*0.79, 40,40)];
+    _moreButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width*0.75,self.view.frame.size.height*0.80, 40,40)];
     //    _button.backgroundColor = [UIColor whiteColor];
     [_moreButton setBackgroundImage:[UIImage imageNamed:@"moreinfo.png"] forState:UIControlStateNormal];
     
@@ -223,6 +241,7 @@
     [AXPopoverLabel showFromView:sender animated:YES duration:10.0 title:_title detail:_content configuration:^(AXPopoverLabel *popoverLabel) {
         popoverLabel.showsOnPopoverWindow = NO;
         popoverLabel.translucent = NO;
+        popoverLabel.titleFont = [UIFont systemFontOfSize:15.0];
         //         popoverLabel.titleTextColor = [UIColor blackColor];
         //         popoverLabel.detailTextColor = [[UIColor blackColor] colorWithAlphaComponent:0.9];
         popoverLabel.preferredArrowDirection = AXPopoverArrowDirectionBottom;

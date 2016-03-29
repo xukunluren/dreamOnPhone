@@ -12,5 +12,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *image;
 @property (weak, nonatomic) IBOutlet UILabel *title;
 @property (weak, nonatomic) IBOutlet UILabel *detailTitle;
+@property (weak, nonatomic) IBOutlet UIImageView *backimage;
+@property (weak, nonatomic) IBOutlet UILabel *datelable;
 
 @end

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="258" id="KGk-i7-Jjw" customClass="Diycell">
-            <rect key="frame" x="0.0" y="0.0" width="380" height="258"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="259" id="KGk-i7-Jjw" customClass="Diycell">
+            <rect key="frame" x="0.0" y="0.0" width="380" height="259"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="380" height="257.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="380" height="258.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jP8-Id-1pG">
@@ -48,24 +48,24 @@
                         <color key="textColor" red="0.99747474747474751" green="0.99747474747474751" blue="0.99747474747474751" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e3i-Zr-YHJ">
-                        <rect key="frame" x="0.0" y="0.0" width="380" height="185"/>
-                        <color key="backgroundColor" red="0.0" green="0.7102246807" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="loading.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="X5D-0F-61V">
+                        <rect key="frame" x="0.0" y="0.0" width="380" height="184"/>
                     </imageView>
                 </subviews>
             </tableViewCellContentView>
             <connections>
                 <outlet property="detail" destination="Fy9-8r-jtq" id="mbd-1p-6ca"/>
-                <outlet property="image" destination="e3i-Zr-YHJ" id="bOG-Qq-vDB"/>
+                <outlet property="image" destination="X5D-0F-61V" id="2xR-5l-ZYS"/>
                 <outlet property="love" destination="kHn-5k-HnR" id="ET9-cS-XJm"/>
                 <outlet property="price" destination="Cxx-R2-hiZ" id="vKC-PR-gFx"/>
                 <outlet property="saomiao" destination="Xrb-3C-fAO" id="R6y-TP-GCM"/>
                 <outlet property="title" destination="jP8-Id-1pG" id="Lhe-SI-17i"/>
             </connections>
-            <point key="canvasLocation" x="402" y="372"/>
+            <point key="canvasLocation" x="514" y="343.5"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="loading.jpg" width="620" height="468"/>
         <image name="love.png" width="25" height="25"/>
     </resources>
 </document>

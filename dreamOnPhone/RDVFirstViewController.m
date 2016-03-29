@@ -73,10 +73,17 @@
 -(void)viewDidAppear:(BOOL)animated
 {
 //    [self showIntroWithSeparatePagesInit];
+//    NSLog(@"00000");
+    NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+    [userdefaults removeObjectForKey:@"number"];
+    int number =0;
+    [userdefaults setInteger:number forKey:@"number"];
 
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     self.title = @"梦之园";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _priceArray = [[NSMutableArray alloc] init];
@@ -662,7 +669,8 @@
      cell.price.text = price;
    
     cell.image.contentMode = UIViewContentModeScaleToFill;
-    [cell.image sd_setImageWithURL:imageurl];
+    cell.image.image = [UIImage imageNamed:@"centerback.jpeg"];
+    [cell.image sd_setImageWithURL:imageurl placeholderImage:[UIImage imageNamed:@"loading.jpg"]];
 //    [cell.love addTarget:self action:@selector(shoucang:indexPath:) forControlEvents:UIControlEventTouchUpInside];
 //    NSLog(@"%@",imageurl);
 //    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;

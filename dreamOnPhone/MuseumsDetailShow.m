@@ -51,7 +51,7 @@
 
 -(void)share
 {
-    NSString *shareText = @"nihao";             //分享内嵌文字
+    NSString *shareText = @"";             //分享内嵌文字
     
     
 //    NSURL *url = [NSURL URLWithString: _museumscoverImage];
@@ -86,7 +86,7 @@
     CGFloat navigationH = self.view.frame.size.height;
     CGFloat navigationW = self.view.frame.size.width;
     _imageview.frame  = CGRectMake(0, 0, navigationW, navigationH);
-    _imageview.backgroundColor = [UIColor blueColor];
+    _imageview.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"loading.jpg"]];
     _imageview.contentMode = UIViewContentModeScaleAspectFill;
     _imageview.layer.masksToBounds = YES;
     _imageview.layer.cornerRadius = 5;

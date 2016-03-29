@@ -9,6 +9,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "UIView+SDExtension.h"
 #import "AFNetworking.h"
+#import "MuseumsPictureAndVideo.h"
 #import "MuseumsPictureShow.h"
 
 
@@ -36,6 +37,7 @@ static const CGFloat kMargin = 30;
     NSMutableArray *_imageArray3;
     NSMutableArray *_imageArray4;
     NSArray *imageArray;
+    NSArray *imageVideoArray;
     NSMutableArray *_wikiUrl;
     NSMutableArray *_storyArray;
     
@@ -98,6 +100,21 @@ static const CGFloat kMargin = 30;
     tipLabel.backgroundColor = [UIColor clearColor];
     [self.view addSubview:tipLabel];
     
+    UIButton *back = [[UIButton alloc] initWithFrame:CGRectMake(0, self.view.sd_height*0.9-kBorderW*1, self.view.frame.size.width,100)];
+    [back setTitle:@"返回" forState:UIControlStateNormal];
+    back.contentMode = UIViewContentModeCenter;
+//    back.backgroundColor = [UIColor redColor];
+    [back addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:back];
+    
+}
+-(void)back
+{
+    NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger iii = [userdefaults integerForKey:@"number"];
+    NSLog(@"%ld",(long)iii);
+    [self.tabBarController setSelectedIndex:iii];
+
 }
 -(void)setupNavView{
     
@@ -431,21 +448,21 @@ static const CGFloat kMargin = 30;
     NSArray *numberArray = [stringArray.lastObject componentsSeparatedByString:@"}"];
     NSString *number = numberArray.firstObject;
     NSLog(@"======%@====%@====%@",leibie,classes,number);
-    NSString *item;
+//    NSString *item;
     if ([classes isEqualToString:@"4"]) {
-        item = @"items";
+        _item = @"items";
     }else if ([classes isEqualToString:@"3"])
     {
-        item = @"plants";
+        _item = @"items";
     }else if ([classes isEqualToString:@"2"])
     {
-        item = @"plants";
+        _item = @"plants";
     }
     else if ([classes isEqualToString:@"1"])
     {
-        item = @"plants";
+        _item = @"plants";
     }
-    NSString *stringUrl = [NSString stringWithFormat:@"%@%@/%@",KURL,item,number];
+    NSString *stringUrl = [NSString stringWithFormat:@"%@%@/%@",KURL,_item,number];
     NSLog(@"%@",stringUrl);
     
     [self getItemsData:stringUrl];
@@ -495,95 +512,182 @@ static const CGFloat kMargin = 30;
 
 -(void)analysisData:(NSDictionary *)object
 {
-    NSInteger intId = 0;
-    NSLog(@"%@",object);
-    NSString *title = [object objectForKey:@"name"];
-    NSNumber *iD = [object objectForKey:@"id"];
-    NSString *signid = [[NSString alloc]initWithFormat:@"%@",iD];
-    NSLog(@"%@",signid);
-    NSString *description = [object objectForKey:@"description"];
-    
-//    NSString *content = [object objectForKey:@"info"];
-    NSDictionary *imageDic1 = [object objectForKey:@"image"];
-    NSString *imageaddress1 = [imageDic1 objectForKey:@"url"];
-    NSString *image1 = [NSString stringWithFormat:@"%@%@",MainURL,imageaddress1];
-    
-    NSDictionary *imageLogo = [imageDic1 objectForKey:@"logo"];
-    NSString *imagelogo1 = [imageLogo objectForKey:@"url"];
-    NSString *logo = [NSString stringWithFormat:@"%@%@",MainURL,imagelogo1];
-    
-    NSDictionary *imageDic2 = [object objectForKey:@"image2"];
-    NSString *imageaddress2 = [imageDic2 objectForKey:@"url"];
-    NSString *image2 = [NSString stringWithFormat:@"%@%@",MainURL,imageaddress2];
-    
-    NSDictionary *imageDic3 = [object objectForKey:@"image3"];
-    NSString *imageaddress3 = [imageDic3 objectForKey:@"url"];
-    NSString *image3 = [NSString stringWithFormat:@"%@%@",MainURL,imageaddress3];
-    
-    NSDictionary *imageDic4 = [object objectForKey:@"image4"];
-    NSString *imageaddress4 = [imageDic4 objectForKey:@"url"];
-    NSString *image4 = [NSString stringWithFormat:@"%@%@",MainURL,imageaddress4];
-    
-    NSString *content = [object objectForKey:@"content"];
-    
-    NSString *story1 = [object objectForKey:@"story"];
-    
-    NSString *story = [NSString stringWithFormat:@"%@/n%@/n%@",description,content,story1];
-    NSLog(@"%@",story);
-    if ([story isEqual:[NSNull null]]) {
-        story = @"nihao";
-    }
-    NSString *wikiurl = [object objectForKey:@"wikiurl"];
-    if ([wikiurl isEqual:[NSNull null]]) {
-        wikiurl = @"www.baidu.com";
-    }
-    
-    
-    NSString *iii = @"4";
-
-    if ( [image4 isEqualToString:@"http://202.121.66.52:8010<null>"]) {
-        iii = @"3";
-    }
-    if ( [image3 isEqualToString:@"http://202.121.66.52:8010<null>"]) {
-        iii = @"2";
-    }
-    if ([image2 isEqualToString:@"http://202.121.66.52:8010<null>"]) {
-        iii= @"1";
-    }
-    //    NSString *biaozhi = @"http://202.121.66.52:8010<null>";
-    //    if ([_image4 isEqualToString:biaozhi]) {
-    //    NSArray *imageArray = @[_image1,_image2,_image3];
-    //    }else if ([_image3 isEqualToString:biaozhi])
-    //    {
-    //     NSArray *imageArray = @[_image1,_image2];
-    //    }else if ([_image2 isEqualToString:biaozhi])
-    //    {
-    //    NSArray *imageArray = @[_image1];
-    //    }
-    if ([iii isEqualToString:@"4"]) {
-        imageArray = @[image1,image2,image3,image4];
-    }else if ([iii isEqualToString:@"3"])
-    {
-        imageArray = @[image1,image2,image3];
-    }else if ([iii isEqualToString:@"2"])
-    {
-        imageArray = @[image1,image2];
-    }else if ([iii isEqualToString:@"1"])
-    {
-        imageArray = @[image1];
-    }
-
-    MuseumsPictureShow *pictureShow = [[MuseumsPictureShow alloc] initWithNibName:nil bundle:nil];
-    self.delegate = pictureShow;
-    [self.delegate passimageFromSaoMiao:imageArray story:story baidu:wikiurl];
-    [UIView transitionWithView:self.navigationController.view duration:0.5 options:UIViewAnimationOptionTransitionCurlUp animations:^{
-        //      UIViewAnimationOptionTransitionCurlUp
-        //        UIViewAnimationOptionTransitionCrossDissolve
-        [self.navigationController pushViewController:pictureShow animated:NO];
+    NSLog(@"---%@",_item);
+    if ([_item isEqualToString:@"plants"]) {
+        NSInteger intId = 0;
+        NSLog(@"%@",object);
+        NSString *title = [object objectForKey:@"name"];
+        NSNumber *iD = [object objectForKey:@"id"];
+        NSString *signid = [[NSString alloc]initWithFormat:@"%@",iD];
+        NSLog(@"%@",signid);
+        NSString *description = [object objectForKey:@"description"];
         
-    } completion:^(BOOL finished) {
+        //    NSString *content = [object objectForKey:@"info"];
+        NSDictionary *imageDic1 = [object objectForKey:@"image"];
+        NSString *imageaddress1 = [imageDic1 objectForKey:@"url"];
+        NSString *image1 = [NSString stringWithFormat:@"%@%@",MainURL,imageaddress1];
         
-    }];
+        NSDictionary *imageLogo = [imageDic1 objectForKey:@"logo"];
+        NSString *imagelogo1 = [imageLogo objectForKey:@"url"];
+        NSString *logo = [NSString stringWithFormat:@"%@%@",MainURL,imagelogo1];
+        
+        NSDictionary *imageDic2 = [object objectForKey:@"image2"];
+        NSString *imageaddress2 = [imageDic2 objectForKey:@"url"];
+        NSString *image2 = [NSString stringWithFormat:@"%@%@",MainURL,imageaddress2];
+        
+        NSDictionary *imageDic3 = [object objectForKey:@"image3"];
+        NSString *imageaddress3 = [imageDic3 objectForKey:@"url"];
+        NSString *image3 = [NSString stringWithFormat:@"%@%@",MainURL,imageaddress3];
+        
+        NSDictionary *imageDic4 = [object objectForKey:@"image4"];
+        NSString *imageaddress4 = [imageDic4 objectForKey:@"url"];
+        NSString *image4 = [NSString stringWithFormat:@"%@%@",MainURL,imageaddress4];
+        
+        NSString *content = [object objectForKey:@"content"];
+        
+        NSString *story1 = [object objectForKey:@"story"];
+        
+        NSString *story = [NSString stringWithFormat:@"%@/n%@/n%@",description,content,story1];
+        NSLog(@"%@",story);
+        if ([story isEqual:[NSNull null]]) {
+            story = @"nihao";
+        }
+        NSString *wikiurl = [object objectForKey:@"wikiurl"];
+        if ([wikiurl isEqual:[NSNull null]]) {
+            wikiurl = @"www.baidu.com";
+        }
+        
+        
+        NSString *iii = @"4";
+        
+        if ( [image4 isEqualToString:@"http://202.121.66.52:8010<null>"]) {
+            iii = @"3";
+        }
+        if ( [image3 isEqualToString:@"http://202.121.66.52:8010<null>"]) {
+            iii = @"2";
+        }
+        if ([image2 isEqualToString:@"http://202.121.66.52:8010<null>"]) {
+            iii= @"1";
+        }
+        //    NSString *biaozhi = @"http://202.121.66.52:8010<null>";
+        //    if ([_image4 isEqualToString:biaozhi]) {
+        //    NSArray *imageArray = @[_image1,_image2,_image3];
+        //    }else if ([_image3 isEqualToString:biaozhi])
+        //    {
+        //     NSArray *imageArray = @[_image1,_image2];
+        //    }else if ([_image2 isEqualToString:biaozhi])
+        //    {
+        //    NSArray *imageArray = @[_image1];
+        //    }
+        if ([iii isEqualToString:@"4"]) {
+            imageArray = @[image1,image2,image3,image4];
+        }else if ([iii isEqualToString:@"3"])
+        {
+            imageArray = @[image1,image2,image3];
+        }else if ([iii isEqualToString:@"2"])
+        {
+            imageArray = @[image1,image2];
+        }else if ([iii isEqualToString:@"1"])
+        {
+            imageArray = @[image1];
+        }
+        
+        MuseumsPictureShow *pictureShow = [[MuseumsPictureShow alloc] initWithNibName:nil bundle:nil];
+        self.delegate = pictureShow;
+        [self.delegate passimageFromSaoMiao:imageArray story:story baidu:wikiurl];
+        [UIView transitionWithView:self.navigationController.view duration:0.5 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+            //      UIViewAnimationOptionTransitionCurlUp
+            //        UIViewAnimationOptionTransitionCrossDissolve
+            [self.navigationController pushViewController:pictureShow animated:NO];
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+    }
+    
+    if ([_item isEqualToString:@"items"]) {
+        NSInteger intId = 0;
+        NSLog(@"%@",object);
+        
+        NSString *title = [object objectForKey:@"name"];
+
+        
+        NSDictionary *voice = [object objectForKey:@"voice"];
+        NSString *voiceUrl = [voice objectForKey:@"url"];
+        NSString *mp3Url = [NSString stringWithFormat:@"%@%@",MainURL,voiceUrl];
+        
+        
+        NSString *content = [object objectForKey:@"content"];
+        
+        
+        NSDictionary *imageDic1 = [object objectForKey:@"image"];
+        NSString *imageaddress1 = [imageDic1 objectForKey:@"url"];
+        NSString *image1 = [NSString stringWithFormat:@"%@%@",MainURL,imageaddress1];
+        
+        NSDictionary *imageDic2 = [object objectForKey:@"image2"];
+        NSString *imageaddress2 = [imageDic2 objectForKey:@"url"];
+        NSString *image2 = [NSString stringWithFormat:@"%@%@",MainURL,imageaddress2];
+        
+        NSDictionary *imageDic3 = [object objectForKey:@"image3"];
+        NSString *imageaddress3 = [imageDic3 objectForKey:@"url"];
+        NSString *image3 = [NSString stringWithFormat:@"%@%@",MainURL,imageaddress3];
+        
+        NSDictionary *imageDic4 = [object objectForKey:@"image4"];
+        NSString *imageaddress4 = [imageDic4 objectForKey:@"url"];
+        NSString *image4 = [NSString stringWithFormat:@"%@%@",MainURL,imageaddress4];
+        
+        NSString *story = [object objectForKey:@"info"];
+
+        
+        NSString *iii = @"4";
+        
+        if ( [image4 isEqualToString:@"http://202.121.66.52:8010<null>"]) {
+            iii = @"3";
+        }
+        if ( [image3 isEqualToString:@"http://202.121.66.52:8010<null>"]) {
+            iii = @"2";
+        }
+        if ([image2 isEqualToString:@"http://202.121.66.52:8010<null>"]) {
+            iii= @"1";
+        }
+        //    NSString *biaozhi = @"http://202.121.66.52:8010<null>";
+        //    if ([_image4 isEqualToString:biaozhi]) {
+        //    NSArray *imageArray = @[_image1,_image2,_image3];
+        //    }else if ([_image3 isEqualToString:biaozhi])
+        //    {
+        //     NSArray *imageArray = @[_image1,_image2];
+        //    }else if ([_image2 isEqualToString:biaozhi])
+        //    {
+        //    NSArray *imageArray = @[_image1];
+        //    }
+        if ([iii isEqualToString:@"4"]) {
+            imageVideoArray = @[image1,image2,image3,image4];
+        }else if ([iii isEqualToString:@"3"])
+        {
+            imageVideoArray = @[image1,image2,image3];
+        }else if ([iii isEqualToString:@"2"])
+        {
+            imageVideoArray = @[image1,image2];
+        }else if ([iii isEqualToString:@"1"])
+        {
+            imageVideoArray = @[image1];
+        }
+        
+        MuseumsPictureAndVideo *pictureShow = [[MuseumsPictureAndVideo alloc] initWithNibName:nil bundle:nil];
+        self.delegate = pictureShow;
+        [self.delegate passvideoFromSaoMiao:imageVideoArray withTitle:title mp3:mp3Url content:content story:story];
+        [UIView transitionWithView:self.navigationController.view duration:0.5 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+            //      UIViewAnimationOptionTransitionCurlUp
+            //        UIViewAnimationOptionTransitionCrossDissolve
+            [self.navigationController pushViewController:pictureShow animated:NO];
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+    }
+    
     
 ////    [_imageUrlArray addObject:logo];
 ////    [_titleArray addObject:title];

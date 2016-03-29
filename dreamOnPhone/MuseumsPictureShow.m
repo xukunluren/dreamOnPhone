@@ -12,6 +12,7 @@
 #import "TOWebViewController.h"
 #import "Scan_VC.h"
 #import "UMSocial.h"
+#import "UIImageView+WebCache.h"
 
 @interface MuseumsPictureShow ()<passvalueDelegate,passvalueFromSaoMiaoDelegate>
 
@@ -22,6 +23,7 @@
     NSArray *_imageArray;
     NSString *_story;
     NSString *_baiduUrl;
+    NSString *_imageUrl;
     
 }
 
@@ -31,33 +33,48 @@
     
     [self setViewOfPicture];
     //设置右barbutton
-    UIImage *image = [UIImage imageNamed:@"share.png"];
+//    UIImage *image = [UIImage imageNamed:@"share.png"];
+//    UIButton *myCustomButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    myCustomButton.bounds = CGRectMake( 0, 0, image.size.width, image.size.height );
+//    [myCustomButton setImage:image forState:UIControlStateNormal];
+//    [myCustomButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    
+//    
+//    
+//    
+//    UIBarButtonItem *rightbar = [[UIBarButtonItem alloc] initWithCustomView:myCustomButton];
+//    
+//    self.navigationItem.rightBarButtonItem = rightbar;
+    
+    
+    
+    
+    //设置右barbutton
+    UIImage *image = [UIImage imageNamed:@"Share.png"];
     UIButton *myCustomButton = [UIButton buttonWithType:UIButtonTypeCustom];
     myCustomButton.bounds = CGRectMake( 0, 0, image.size.width, image.size.height );
     [myCustomButton setImage:image forState:UIControlStateNormal];
     [myCustomButton addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
-    
-    
     UIBarButtonItem *rightbar = [[UIBarButtonItem alloc] initWithCustomView:myCustomButton];
-    
     self.navigationItem.rightBarButtonItem = rightbar;
-    
 }
 
 -(void)share
 {
-    NSString *shareText = @"nihao";             //分享内嵌文字
+    NSString *shareText = _story;             //分享内嵌文字
+//    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:_imageUrl]];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_imageUrl]]];
     
-    
-    //    NSURL *url = [NSURL URLWithString: _museumscoverImage];
-    //    //    UIImage *imagea = [UIImage imageWithData: [NSData dataWithContentsOfURL:url]];
-    //    UIImage *shareImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];          //分享内嵌图片
+//        NSURL *url = [NSURL URLWithString: _museumscoverImage];
+//        //    UIImage *imagea = [UIImage imageWithData: [NSData dataWithContentsOfURL:url]];
+//        UIImage *shareImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];          //分享内嵌图片
     //
     //调用快速分享接口
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"55fcee3ce0f55a4ccb006a88"
                                       shareText:shareText
-                                     shareImage:nil
+                                     shareImage:image
                                 shareToSnsNames:nil
                                        delegate:nil];
     
@@ -90,9 +107,9 @@
     pageView.currentPageColor = [UIColor blueColor];
     [self.view addSubview:pageView];
     
-    _storyLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, self.view.frame.size.height*0.4, self.view.frame.size.width-30, self.view.frame.size.height*0.35)];
+    _storyLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, self.view.frame.size.height*0.45, self.view.frame.size.width-30, self.view.frame.size.height*0.4)];
 //    _storyLabel.text = _story;
-    _storyLabel.font = [UIFont systemFontOfSize:14.0];
+    _storyLabel.font = [UIFont systemFontOfSize:16.0];
     _storyLabel.numberOfLines = 0;
     
     NSMutableAttributedString *text = [[NSMutableAttributedString alloc] initWithString:_story];
@@ -111,7 +128,7 @@
     [self.view addSubview:_storyLabel];
     
     UIButton *baiduButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    baiduButton.frame = CGRectMake(self.view.frame.size.width*0.8, self.view.frame.size.height*0.8, 70, 30);
+    baiduButton.frame = CGRectMake(self.view.frame.size.width*0.8, self.view.frame.size.height*0.85, 70, 30);
     [baiduButton setTitle:@"百度百科" forState:UIControlStateNormal];
     
 //    [baiduButton.layer  setMasksToBounds:YES];
@@ -138,6 +155,7 @@
     _imageArray = imagearray;
     _story =story;
     _baiduUrl = baidu;
+    _imageUrl = imagearray.firstObject;
 }
 
 
@@ -147,6 +165,7 @@
     _imageArray = imagearray;
     _story = story;
     _baiduUrl = baidu;
+    _imageUrl = imagearray.firstObject;
 }
 
 

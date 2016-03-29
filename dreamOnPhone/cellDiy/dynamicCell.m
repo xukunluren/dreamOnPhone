@@ -12,7 +12,19 @@
 
 - (void)awakeFromNib {
     // Initialization code
-  
+    self.backimage.layer.cornerRadius = 5;
+    self.backimage.layer.masksToBounds = YES;
+    //    self.image.layer.borderWidth = 1.0;
+    self.backimage.backgroundColor = [UIColor whiteColor];
+//    self.backimage.layer.borderColor = [UIColor grayColor].CGColor;
+//    self.backimage.layer.borderWidth = 1;
+//    self.detail.lineBreakMode = UILineBreakModeCharacterWrap;
+    
+    self.datelable.layer.cornerRadius = 2;
+    self.datelable.layer.masksToBounds = YES;
+    //    self.image.layer.borderWidth = 1.0;
+    self.datelable.backgroundColor = [UIColor grayColor];
+
     
 }
 

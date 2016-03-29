@@ -38,10 +38,17 @@
     }
     return self;
 }
-
+-(void)viewDidAppear:(BOOL)animated
+{
+    NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+    [userdefaults removeObjectForKey:@"number"];
+    int number = 4;
+    [userdefaults setInteger:number forKey:@"number"];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.mydelegate =(AppDelegate *)[[UIApplication sharedApplication]delegate];
     self.view.backgroundColor = [UIColor grayColor];
     
@@ -56,7 +63,7 @@
     
     UIBarButtonItem *rightbar = [[UIBarButtonItem alloc] initWithCustomView:myCustomButton];
     
-    self.navigationItem.rightBarButtonItem = rightbar;
+//    self.navigationItem.rightBarButtonItem = rightbar;
 
     
     
@@ -100,7 +107,8 @@
     
     
     UIImageView *iconView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width*0.5-40,self.view.frame.size.height*0.12, 80,80)];
-    iconView.image = [UIImage imageNamed:@"iconOfCenter.jpeg"];
+    iconView.image = [UIImage imageNamed:@"iconback.jpg"];
+//                      @"iconOfCenter.jpeg"];
     iconView.layer.masksToBounds = YES;
     iconView.layer.cornerRadius = iconView.bounds.size.width * 0.5;
     iconView.layer.borderWidth = 3.0;
@@ -190,7 +198,7 @@
         //通过xib的名称加载自定义的cell
         cell = [[[NSBundle mainBundle] loadNibNamed:@"CenterCell" owner:self options:nil] lastObject];
     }
-     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 //    [self configureCell:cell forIndexPath:indexPath];
     if (indexPath.row == 1) {
         cell.title.text = @"我收藏的展品";

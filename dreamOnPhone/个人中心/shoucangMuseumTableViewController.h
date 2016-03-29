@@ -6,7 +6,7 @@
 //  Copyright © 2016年 xukun. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <UIKit/UIKit.h>   ／》
 #import "AppDelegate.h"
 @protocol passSigleIdToShowViewFromCenterDelegate <NSObject>
 

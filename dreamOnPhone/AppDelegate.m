@@ -25,11 +25,13 @@
 #import "Scan_VC.h"
 #import "yidaoViewController.h"
 #import "CoreNewFeatureVC.h"
-//#import "rootViewController.h"
+#import "dynamicalViewController.h"
 #import "EweeklyViewController.h"
+#import "CamerViewController.h"
 
 
 @interface AppDelegate ()
+@property(nonatomic,strong)CamerViewController *yyy;
 @property(nonatomic,strong)Scan_VC *saomian;
 @end
 
@@ -43,9 +45,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+    int number = 0;
+    [userdefaults setInteger:number  forKey:@"number"];
     
     [UMSocialData setAppKey:@"55fcee3ce0f55a4ccb006a88"];
-    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     
     [UMSocialWechatHandler setWXAppId:@"wxd930ea5d5a258f4f" appSecret:@"db426a9829e4b49a0dcac7b4162da6b6" url:@"http://www.umeng.com/social"];
     
@@ -58,7 +63,7 @@
     BOOL canShow = [CoreNewFeatureVC canShowNewFeature];
     
     //测试代码，正式版本应该删除
-    canShow = YES;
+//    canShow = YES;
     
     if(canShow){
         
@@ -105,6 +110,9 @@
     wind.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"梦之园" image:[[UIImage imageNamed:@"home.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"home.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
    self.saomian = [[Scan_VC alloc] init];
+//    UIViewController *yyy = [[UIViewController alloc] init];
+   _yyy = [[CamerViewController alloc] init];
+//    self.saomian.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"扫一扫" image:[[UIImage imageNamed:@"scaning.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"scaning.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     self.saomian.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"扫一扫" image:[[UIImage imageNamed:@"scaning.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"scaning.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
 //    QRCodeReaderViewController *photoq = [[QRCodeReaderViewController alloc] init];
@@ -114,9 +122,14 @@
     //    //可用于解决图片灰色问题
     //    wave.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"梦生命" image:[[UIImage imageNamed:@"plant.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"plant.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
-    DreamOfProductViewController *flow = [[DreamOfProductViewController alloc]init];
+//    DreamOfProductViewController *flow = [[DreamOfProductViewController alloc]init];
+    dynamicalViewController *flow = [[dynamicalViewController alloc] init];
+    flow.titleString = @"乐活动";
+    flow.tag = @"0";
+//    flow.view.backgroundColor = [UIColor colorWithRed:230.0/255.0 green:230.0/255.0 blue:230.0/255.0 alpha:1.0];
+
     //可用于解决图片灰色问题
-    flow.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"梦生活" image:[[UIImage imageNamed:@"shopping.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"shopping.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    flow.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"乐活动" image:[[UIImage imageNamed:@"shopping.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"shopping.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
     //    DreamOfEweakViewController *four = [[DreamOfEweakViewController alloc]init];
     
@@ -125,6 +138,7 @@
 //    rootViewController *four = [[rootViewController alloc] init];
     EweeklyViewController *four = [[EweeklyViewController alloc] init];
     //可用于解决图片灰色问题
+     
     four.tabBarItem = [[UITabBarItem alloc]initWithTitle:@"E周刊" image:[[UIImage imageNamed:@"eweekly.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] selectedImage:[[UIImage imageNamed:@"eweekly.png"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
     RDVFirthViewController *longTide = [[RDVFirthViewController alloc]init];
@@ -143,6 +157,7 @@
     
     UINavigationController *navThrid = [[UINavigationController alloc]initWithRootViewController:flow];
     //    navThrid.navigationBar.backgroundColor = BarColor;
+//    navThrid.view.backgroundColor = [UIColor colorWithRed:230.0/255.0 green:230.0/255.0 blue:230.0/255.0 alpha:1.0];
     [tabBarController addChildViewController:navThrid];
     UINavigationController *photo = [[UINavigationController alloc] initWithRootViewController:
                                      self.saomian];
@@ -165,11 +180,12 @@
     
     
     UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
+//    [btn addTarget:self action:@selector(saoMiaoTiaozhuan) forControlEvents:UIControlEventTouchUpInside];
     btn.backgroundColor=[UIColor  colorWithRed:67.0/255.0 green:148.0/255.0 blue:247.0/255.0 alpha:1];
     [btn setTintColor:[UIColor colorWithRed:67.0/255.0 green:148.0/255.0 blue:247.0/255.0 alpha:1.0]];
     btn.frame=CGRectMake(self.window.frame.size.width*0.5-40, self.window.frame.size.height-80, 80, 80);
     UIImageView *imagview = [[UIImageView alloc] init];
-    imagview.frame = CGRectMake(22.5, 15, 35, 35);
+    imagview.frame = CGRectMake(22, 15, 40, 40);
     UIImage *image = [UIImage imageNamed:@"code.png"];
     imagview.image = image;
     [btn addSubview:imagview];
@@ -188,7 +204,13 @@
 
 }
 
+-(void)saoMiaoTiaozhuan
+{
+    Scan_VC *saoMian = [[Scan_VC alloc] init];
+    [self.window.rootViewController presentViewController:saoMian animated:YES completion:^{
+    }];
 
+}
 
 - (void)customizeInterface {
     UINavigationBar *navigationBarAppearance = [UINavigationBar appearance];

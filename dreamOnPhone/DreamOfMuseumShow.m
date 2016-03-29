@@ -123,7 +123,7 @@
     CGFloat width = self.view.frame.size.width-10;
     _museumsImageView.frame  = CGRectMake(5, 5, width, imageH);
 //    _museumsImageView.backgroundColor = [UIColor redColor];
-    _museumDyImageView.image = [UIImage imageNamed:@"loading1.jpg"];
+    _museumsImageView.image = [UIImage imageNamed:@"loading1.jpg"];
     _museumsImageView.layer.masksToBounds = YES;
     _museumsImageView.layer.cornerRadius = 5;
     _museumsImageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -398,7 +398,7 @@
     _museumsLabel.text = _museumsname;
     NSURL *url = [NSURL URLWithString:_museumscoverImage];
     
-    [_museumsImageView sd_setImageWithURL:url];
+    [_museumsImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"loading.jpg"]] ;
     _priceLabel.text= _price;
 
 
@@ -412,12 +412,11 @@
     MuseumsDetailShow *museumShow = [[MuseumsDetailShow alloc] init];
     self.delegate = museumShow;
     [self.delegate passIdToDetailShow:_museumsname ider:_ID andInfo:_info andInfoimage:_infoImage];
-    [UIView transitionWithView:self.navigationController.view duration:0.5 options:UIViewAnimationOptionTransitionCurlUp animations:^{
+    [UIView transitionWithView:self.navigationController.view duration:0.2 options:UIViewAnimationOptionTransitionCurlUp animations:^{
         //      UIViewAnimationOptionTransitionCurlUp
         //        UIViewAnimationOptionTransitionCrossDissolve
         [self.navigationController pushViewController:museumShow animated:NO];
     } completion:^(BOOL finished) {
-        
     }];
     
     
@@ -573,6 +572,8 @@
     }else{
     
         dynamicalViewController *dynamic = [[dynamicalViewController alloc] init];
+        dynamic.titleString = @"场馆动态";
+        dynamic.tag = @"1";
         dynamic.num = _ID;
         [UIView transitionWithView:self.navigationController.view duration:0.5 options:UIViewAnimationOptionTransitionCurlUp animations:^{
             //      UIViewAnimationOptionTransitionCurlUp

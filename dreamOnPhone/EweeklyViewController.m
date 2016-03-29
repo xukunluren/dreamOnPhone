@@ -18,10 +18,20 @@
 @implementation EweeklyViewController
 {
     NSMutableArray *_urlArray;
+    NSString *_urlString;
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+    [userdefaults removeObjectForKey:@"number"];
+    int number = 3;
+    [userdefaults setInteger:number forKey:@"number"];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     
     // Do any additional setup after loading the view.
     _urlArray = [[NSMutableArray alloc] init];
@@ -54,6 +64,7 @@
 {
     _eweeklyWeb = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     NSString *url = _urlArray.firstObject;
+    _urlString = url;
     NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     [self.view addSubview: _eweeklyWeb];
     [_eweeklyWeb loadRequest:request];
@@ -95,7 +106,7 @@
 }
 -(void)share
 {
-    NSString *shareText = @"nihao";             //分享内嵌文字
+    NSString *shareText = _urlString;             //分享内嵌文字
     
     
     //    NSURL *url = [NSURL URLWithString: _museumscoverImage];

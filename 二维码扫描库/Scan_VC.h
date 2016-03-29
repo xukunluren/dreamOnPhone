@@ -11,14 +11,17 @@
 
 @protocol passvalueFromSaoMiaoDelegate <NSObject>
 
+@optional
 -(void)passimageFromSaoMiao:(NSArray *)imagearray story:(NSString *)story baidu:(NSString *)baidu;
-
+@optional
+-(void)passvideoFromSaoMiao:(NSArray *)image withTitle:(NSString *)title mp3:(NSString *)mp3Url content:(NSString *)content story:(NSString *)story;
 @end
 
 
 @interface Scan_VC : UIViewController
 
 @property(retain,nonatomic) id <passvalueFromSaoMiaoDelegate> delegate;
+@property(retain,nonatomic)NSString *item;
 @end
 // 版权属于原作者
 // http://code4app.com (cn) http://code4app.net (en)

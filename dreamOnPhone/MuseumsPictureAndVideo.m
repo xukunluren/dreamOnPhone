@@ -210,7 +210,7 @@
     [_button addTarget:self action:@selector(playButton) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_button];
     
-    _moreButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width*0.75,self.view.frame.size.height*0.80, 40,40)];
+    _moreButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width*0.75,self.view.frame.size.height*0.82, 40,40)];
     //    _button.backgroundColor = [UIColor whiteColor];
     [_moreButton setBackgroundImage:[UIImage imageNamed:@"moreinfo.png"] forState:UIControlStateNormal];
     

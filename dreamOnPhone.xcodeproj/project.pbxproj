@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		676970BD1CB4AFA500691B12 /* lunch.png in Resources */ = {isa = PBXBuildFile; fileRef = 676970BC1CB4AFA500691B12 /* lunch.png */; };
 		84069BFF1B841FF1002A9204 /* DreamOfLifeShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 84069BFE1B841FF1002A9204 /* DreamOfLifeShow.m */; };
 		840D29521B7B2172003A9C28 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 840D29321B7B2172003A9C28 /* MKAnnotationView+WebCache.m */; };
 		840D29531B7B2172003A9C28 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 840D29341B7B2172003A9C28 /* NSData+ImageContentType.m */; };
@@ -298,6 +299,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		676970BC1CB4AFA500691B12 /* lunch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lunch.png; sourceTree = "<group>"; };
 		84069BFD1B841FF1002A9204 /* DreamOfLifeShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DreamOfLifeShow.h; sourceTree = "<group>"; };
 		84069BFE1B841FF1002A9204 /* DreamOfLifeShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DreamOfLifeShow.m; sourceTree = "<group>"; };
 		840D29311B7B2172003A9C28 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -1001,6 +1003,7 @@
 				C00A08C51C52048700F6EFCE /* code@2x.png */,
 				C00A08C31C52025E00F6EFCE /* camera@2x.png */,
 				C00A08211C50737C00F6EFCE /* moreinfo.png */,
+				676970BC1CB4AFA500691B12 /* lunch.png */,
 				C00A081C1C4F26C600F6EFCE /* iconback.jpg */,
 				C00A081A1C4F268D00F6EFCE /* centerback.jpeg */,
 				C00A07FC1C4E6EED00F6EFCE /* f3@2x.png */,
@@ -1801,6 +1804,7 @@
 				84FB3B391BB2D5790009B034 /* tabbar_info_selected.png in Resources */,
 				85F16C1A1C3A6613007E883A /* Images.xcassets in Resources */,
 				8491F5A41C3FA7F700D926EB /* UMSocialSDKResourcesNew.bundle in Resources */,
+				676970BD1CB4AFA500691B12 /* lunch.png in Resources */,
 				847781631C4DD70900C3188B /* love@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

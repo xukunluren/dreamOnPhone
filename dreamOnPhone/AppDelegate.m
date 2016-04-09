@@ -48,11 +48,12 @@
     NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
     int number = 0;
     [userdefaults setInteger:number  forKey:@"number"];
-    
     [UMSocialData setAppKey:@"55fcee3ce0f55a4ccb006a88"];
+
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     
-    [UMSocialWechatHandler setWXAppId:@"wxd930ea5d5a258f4f" appSecret:@"db426a9829e4b49a0dcac7b4162da6b6" url:@"http://www.umeng.com/social"];
+   [UMSocialWechatHandler setWXAppId:@"wxd74689eea1f59a10" appSecret:@"5527f924ab4a416a8b8e85ba0f5c0667" url:@"http://www.baidu.com"];
+   
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
@@ -66,6 +67,7 @@
 //    canShow = YES;
     
     if(canShow){
+        
         
         NewFeatureModel *m1 = [NewFeatureModel model:[UIImage imageNamed:@"f1"]];
         

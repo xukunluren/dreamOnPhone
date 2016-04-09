@@ -101,7 +101,8 @@
 //    myCustomButton.bounds = CGRectMake( 0, 0, image.size.width, image.size.height );
 //    [myCustomButton setImage:image forState:UIControlStateNormal];
 //    [myCustomButton addTarget:self action:@selector(photo) forControlEvents:UIControlEventTouchUpInside];
-//    
+//
+   
 //    
 //    UIBarButtonItem *rightbar = [[UIBarButtonItem alloc] initWithCustomView:myCustomButton];
 //

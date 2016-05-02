@@ -14,6 +14,7 @@
 #import "AXPopoverLabel.h"
 #import "Scan_VC.h"
 #import "UIImageView+WebCache.h"
+#import "common.h"
 
 
 @interface MuseumsPictureAndVideo ()<passvalueDelegate,passvalueFromSaoMiaoDelegate>
@@ -93,6 +94,7 @@
 }
 -(void)share
 {
+    NSString *shareUrl = [NSString stringWithFormat:@"%@%@",SHARE_URL,self.ider];
     
     NSString *shareText = [NSString stringWithFormat:@"%@--%@",_title,_stroy];             //分享内嵌文字
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_imageString]]];
@@ -107,10 +109,12 @@
                                          appKey:@"55fcee3ce0f55a4ccb006a88"
                                       shareText:shareText
                                      shareImage:image
-                                shareToSnsNames:nil
+                                shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite,UMShareToSina,UMShareToTencent,UMShareToSms]
                                        delegate:nil];
     
+    [UMSocialData defaultData].extConfig.wechatSessionData.url =shareUrl;
     
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = shareUrl;
 }
 
 

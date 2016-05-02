@@ -24,6 +24,9 @@
     self.datelable.layer.masksToBounds = YES;
     //    self.image.layer.borderWidth = 1.0;
     self.datelable.backgroundColor = [UIColor grayColor];
+    
+    self.biaoshi.layer.cornerRadius = 5;
+    self.biaoshi.layer.masksToBounds = YES;
 
     
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,45 +14,83 @@
                 <rect key="frame" x="0.0" y="0.0" width="380" height="258.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jP8-Id-1pG">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jP8-Id-1pG">
                         <rect key="frame" x="8" y="187" width="364" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="5cd-LZ-0eE"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fy9-8r-jtq">
-                        <rect key="frame" x="8" y="216" width="293" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fy9-8r-jtq">
+                        <rect key="frame" x="8" y="216" width="35.5" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xrb-3C-fAO">
-                        <rect key="frame" x="309" y="216" width="63" height="21"/>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xrb-3C-fAO">
+                        <rect key="frame" x="313" y="216" width="56" height="18"/>
                         <color key="backgroundColor" red="0.0" green="0.7102246807" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <rect key="contentStretch" x="0.15000000000000002" y="0.0" width="1" height="1"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="4Rp-UW-bVJ"/>
+                            <constraint firstAttribute="width" constant="40" id="S0J-Hz-fQO"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <state key="normal">
                             <color key="titleColor" red="0.90588235289999997" green="0.90588235289999997" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="S0J-Hz-fQO"/>
+                            </mask>
+                        </variation>
                     </button>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kHn-5k-HnR" userLabel="love">
-                        <rect key="frame" x="2" y="7" width="50" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                         <state key="normal" image="love.png"/>
                         <connections>
                             <action selector="love:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="FoS-GQ-t50"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" --:--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cxx-R2-hiZ">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" --:--" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cxx-R2-hiZ">
                         <rect key="frame" x="286" y="158" width="89" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="89" id="rb0-sE-fC5"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.99747474747474751" green="0.99747474747474751" blue="0.99747474747474751" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="loading.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="X5D-0F-61V">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="X5D-0F-61V">
                         <rect key="frame" x="0.0" y="0.0" width="380" height="184"/>
                     </imageView>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="Xrb-3C-fAO" secondAttribute="trailing" constant="3" id="0Wq-V0-EBr"/>
+                    <constraint firstAttribute="bottom" secondItem="jP8-Id-1pG" secondAttribute="bottom" constant="50.5" id="1Os-jV-PWb"/>
+                    <constraint firstItem="X5D-0F-61V" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-8" id="1aR-xT-lhD"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="X5D-0F-61V" secondAttribute="trailing" constant="-8" id="1vg-gD-XtO"/>
+                    <constraint firstItem="jP8-Id-1pG" firstAttribute="top" secondItem="Cxx-R2-hiZ" secondAttribute="bottom" constant="8" symbolic="YES" id="4NN-xc-spF"/>
+                    <constraint firstItem="Xrb-3C-fAO" firstAttribute="top" secondItem="jP8-Id-1pG" secondAttribute="bottom" constant="8" symbolic="YES" id="5AB-aY-mNi"/>
+                    <constraint firstItem="Fy9-8r-jtq" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="5Fd-Iq-1Pt"/>
+                    <constraint firstItem="jP8-Id-1pG" firstAttribute="top" secondItem="X5D-0F-61V" secondAttribute="bottom" constant="3" id="9dd-cF-CcI"/>
+                    <constraint firstItem="Fy9-8r-jtq" firstAttribute="top" secondItem="jP8-Id-1pG" secondAttribute="bottom" constant="8" symbolic="YES" id="QKC-gx-Qob"/>
+                    <constraint firstItem="jP8-Id-1pG" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="Qwb-8E-nPJ"/>
+                    <constraint firstItem="jP8-Id-1pG" firstAttribute="top" secondItem="X5D-0F-61V" secondAttribute="bottom" constant="3" id="Yub-Vu-jji"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Cxx-R2-hiZ" secondAttribute="trailing" constant="-3" id="i8R-Ly-Cxf"/>
+                    <constraint firstItem="X5D-0F-61V" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-8" id="qi9-zn-ELn"/>
+                    <constraint firstItem="jP8-Id-1pG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="wA7-Gu-7HH"/>
+                    <constraint firstItem="jP8-Id-1pG" firstAttribute="trailing" secondItem="Xrb-3C-fAO" secondAttribute="trailing" id="yyN-76-l6E"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="Yub-Vu-jji"/>
+                        <exclude reference="yyN-76-l6E"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="detail" destination="Fy9-8r-jtq" id="mbd-1p-6ca"/>

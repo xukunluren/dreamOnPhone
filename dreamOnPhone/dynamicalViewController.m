@@ -129,12 +129,13 @@
     
     cell.backgroundColor = [UIColor colorWithRed:230.0/255.0 green:230.0/255.0 blue:230.0/255.0 alpha:1.0];
 
-    NSString *titleText = [NSString stringWithFormat:@" [%@]  %@",_titleArray[indexPath.row],_nameArray[indexPath.row]];
+    NSString *titleText = [NSString stringWithFormat:@"%@",_nameArray[indexPath.row]];
     cell.title.text = titleText;
-    cell.detailTitle.text = [NSString stringWithFormat:@"   %@",_descriptionArray[indexPath.row]];
+    cell.museumName.text = [NSString stringWithFormat:@"- %@",_titleArray[indexPath.row]];
+    cell.detailTitle.text = [NSString stringWithFormat:@"%@",_descriptionArray[indexPath.row]];
+    cell.datelable.text = _timeArray[indexPath.row];
     NSString *image = _coverImage[indexPath.row];
     NSURL *url = [NSURL URLWithString:image];
-//    [cell.image sd_setImageWithURL:url];
     [cell.image sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"loading.jpg"]];
     return cell;
 }
@@ -145,7 +146,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return  311;
+    return  315;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -158,17 +159,20 @@
   
     
     UIWebView *_webView = [[UIWebView alloc] initWithFrame:CGRectMake(0,0,self.view.bounds.size.width,self.view.bounds.size.height)];
+    
     NSString *path= urlstring;
     
     NSURL *url = [NSURL URLWithString:path];
     
     // 2. 把URL告诉给服务器,请求,从m.baidu.com请求数据
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
     // 3. 发送请求给服务器
     [_webView loadRequest:request];
     diyDetailViewController *diy = [[diyDetailViewController alloc] init];
     [diy.view addSubview:_webView];
+//    diy.navigationController.title = _nameArray[indexPath.row];
+    diy.title = _nameArray[indexPath.row];
+    
     [self.navigationController pushViewController:diy animated:YES];
     
 }
@@ -228,21 +232,21 @@
     NSString *description =[object objectForKey:@"description"];
     NSDictionary *museummmm = [object objectForKey:@"museum"];
     NSString *title;
-    NSString *time;
+    NSString *time1;
     
     title = [museummmm objectForKey:@"name"];
-    time = [object objectForKey:@"create_time"];
-    if (time == nil || time == NULL) {
-        time = @" ";
-    }
-    if ([time isKindOfClass:[NSNull class]]) {
-       time = @" ";
-    }
-    if ([[time stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0) {
-        time = @" ";
-    }
+    time1 = [object objectForKey:@"created_at"];
     
-    
+    if (time1 == nil || time1 == NULL) {
+        time1 = @"----：--T-";
+    }
+    if ([time1 isKindOfClass:[NSNull class]]) {
+       time1 = @"----：--T-";
+    }
+    if ([[time1 stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0) {
+        time1 = @"----：--T-";
+    }
+    NSString *time  = [time1 componentsSeparatedByString:@"T"].firstObject;
     [_nameArray addObject:name];
     [_coverImage addObject:cover];
     [_urlImage addObject:url];

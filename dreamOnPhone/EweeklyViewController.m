@@ -35,7 +35,7 @@
     
     // Do any additional setup after loading the view.
     _urlArray = [[NSMutableArray alloc] init];
-    [self getEweeklyData];
+//    [self getEweeklyData];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar
      setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
@@ -56,23 +56,23 @@
     UIBarButtonItem *rightbar = [[UIBarButtonItem alloc] initWithCustomView:myCustomButton];
     
     self.navigationItem.rightBarButtonItem = rightbar;
-//    [self setWebView];
+    [self setWebView];
     
    
 }
--(void)setWebView
+-(void)setWebView 
 {
     _eweeklyWeb = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    NSString *url = _urlArray.firstObject;
-    _urlString = url;
-    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+//    NSString *url = _urlArray.firstObject;
+    _urlString = @"http://www.bkfj.net/bkeweekly/mobile.aspx";
+    NSURLRequest *request =[NSURLRequest requestWithURL:[NSURL URLWithString:_urlString]];
     [self.view addSubview: _eweeklyWeb];
     [_eweeklyWeb loadRequest:request];
 }
 -(void)getEweeklyData{
 
     [_urlArray removeAllObjects];
-    NSString *items = @"eweekly2";
+    NSString *items = @"eweekly";
     NSString *stringURL = [NSString stringWithFormat:@"%@/%@",MainURL,items];
     NSLog(@"%@",stringURL);
     NSURL *url = [NSURL URLWithString:[stringURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -120,6 +120,9 @@
                                      shareImage:nil
                                 shareToSnsNames:nil
                                        delegate:nil];
+    [UMSocialData defaultData].extConfig.wechatSessionData.url =shareText;
+    
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = shareText;
     
     
 }

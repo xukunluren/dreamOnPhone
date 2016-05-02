@@ -14,5 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *detailTitle;
 @property (weak, nonatomic) IBOutlet UIImageView *backimage;
 @property (weak, nonatomic) IBOutlet UILabel *datelable;
+@property (weak, nonatomic) IBOutlet UILabel *biaoshi;
+@property (weak, nonatomic) IBOutlet UILabel *museumName;
 
 @end

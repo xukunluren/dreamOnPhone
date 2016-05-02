@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6768647F1CBC88CE007DB2B0 /* dynamicalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6768647E1CBC88CE007DB2B0 /* dynamicalViewController.m */; };
 		676970BD1CB4AFA500691B12 /* lunch.png in Resources */ = {isa = PBXBuildFile; fileRef = 676970BC1CB4AFA500691B12 /* lunch.png */; };
 		84069BFF1B841FF1002A9204 /* DreamOfLifeShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 84069BFE1B841FF1002A9204 /* DreamOfLifeShow.m */; };
 		840D29521B7B2172003A9C28 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 840D29321B7B2172003A9C28 /* MKAnnotationView+WebCache.m */; };
@@ -219,7 +220,6 @@
 		8491F6731C422FB600D926EB /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8491F6721C422FB600D926EB /* UIView+SDExtension.m */; };
 		8491F6761C422FE500D926EB /* ViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 8491F6751C422FE500D926EB /* ViewController2.m */; };
 		8491F6EA1C43720400D926EB /* MyBookShellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8491F6E91C43720400D926EB /* MyBookShellCell.m */; };
-		8491F6F01C43963700D926EB /* dynamicalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8491F6EF1C43963600D926EB /* dynamicalViewController.m */; };
 		84A9184B1B972E0200A6D854 /* TOWebViewControllerLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84A9183A1B972E0100A6D854 /* TOWebViewControllerLocalizable.strings */; };
 		84A9184C1B972E0200A6D854 /* TOActivityChrome.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A918421B972E0100A6D854 /* TOActivityChrome.m */; };
 		84A9184D1B972E0200A6D854 /* TOActivitySafari.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A918441B972E0100A6D854 /* TOActivitySafari.m */; };
@@ -299,6 +299,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6768647D1CBC87D6007DB2B0 /* common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		6768647E1CBC88CE007DB2B0 /* dynamicalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dynamicalViewController.m; sourceTree = "<group>"; };
 		676970BC1CB4AFA500691B12 /* lunch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lunch.png; sourceTree = "<group>"; };
 		84069BFD1B841FF1002A9204 /* DreamOfLifeShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DreamOfLifeShow.h; sourceTree = "<group>"; };
 		84069BFE1B841FF1002A9204 /* DreamOfLifeShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DreamOfLifeShow.m; sourceTree = "<group>"; };
@@ -650,7 +652,6 @@
 		8491F6E81C43720400D926EB /* MyBookShellCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBookShellCell.h; sourceTree = "<group>"; };
 		8491F6E91C43720400D926EB /* MyBookShellCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBookShellCell.m; sourceTree = "<group>"; };
 		8491F6EE1C43963600D926EB /* dynamicalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dynamicalViewController.h; sourceTree = "<group>"; };
-		8491F6EF1C43963600D926EB /* dynamicalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dynamicalViewController.m; sourceTree = "<group>"; };
 		84A9183B1B972E0100A6D854 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/TOWebViewControllerLocalizable.strings; sourceTree = "<group>"; };
 		84A9183C1B972E0100A6D854 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/TOWebViewControllerLocalizable.strings; sourceTree = "<group>"; };
 		84A9183D1B972E0100A6D854 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/TOWebViewControllerLocalizable.strings; sourceTree = "<group>"; };
@@ -819,7 +820,7 @@
 				847780D21C4BD43000C3188B /* mapViewController.h */,
 				847780D31C4BD43000C3188B /* mapViewController.m */,
 				8491F6EE1C43963600D926EB /* dynamicalViewController.h */,
-				8491F6EF1C43963600D926EB /* dynamicalViewController.m */,
+				6768647E1CBC88CE007DB2B0 /* dynamicalViewController.m */,
 				C00A08BE1C51038800F6EFCE /* diyDetailViewController.h */,
 				C00A08BF1C51038800F6EFCE /* diyDetailViewController.m */,
 				843DA8841B8DA7BF004C30AD /* MuseumsDetailShow.h */,
@@ -1497,6 +1498,7 @@
 				84D342C21B731A150078A349 /* Controller */,
 				84E12D031B72F3A700A8D5A9 /* AppDelegate.h */,
 				84E12D041B72F3A700A8D5A9 /* AppDelegate.m */,
+				6768647D1CBC87D6007DB2B0 /* common.h */,
 				84E12D0C1B72F3A700A8D5A9 /* Main.storyboard */,
 				84E12D111B72F3A700A8D5A9 /* LaunchScreen.xib */,
 				85F16C191C3A6613007E883A /* Images.xcassets */,
@@ -1835,6 +1837,7 @@
 				840D29591B7B2172003A9C28 /* SDWebImageManager.m in Sources */,
 				8491F62C1C422E3900D926EB /* View+MASAdditions.m in Sources */,
 				84D343101B731C270078A349 /* RDVTabBarController.m in Sources */,
+				6768647F1CBC88CE007DB2B0 /* dynamicalViewController.m in Sources */,
 				C00A07EA1C4E6E7900F6EFCE /* UIApplication+Extend.m in Sources */,
 				84A9184C1B972E0200A6D854 /* TOActivityChrome.m in Sources */,
 				84A9184E1B972E0200A6D854 /* TOWebViewController.m in Sources */,
@@ -1916,7 +1919,6 @@
 				8491F6EA1C43720400D926EB /* MyBookShellCell.m in Sources */,
 				84A9184F1B972E0200A6D854 /* UIImage+TOWebViewControllerIcons.m in Sources */,
 				845122DD1C3B8ADE001BB733 /* DreamOfEweeklyViewController.m in Sources */,
-				8491F6F01C43963700D926EB /* dynamicalViewController.m in Sources */,
 				8491F6761C422FE500D926EB /* ViewController2.m in Sources */,
 				84E12D021B72F3A700A8D5A9 /* main.m in Sources */,
 				840D29581B7B2172003A9C28 /* SDWebImageDownloaderOperation.m in Sources */,
@@ -2134,7 +2136,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.duobo.dreampark;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -2168,7 +2170,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.duobo.dreampark;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

@@ -19,5 +19,6 @@
         CGFloat allLength;
         
     }
+@property(strong,nonatomic) NSString  *ider;
 
 @end

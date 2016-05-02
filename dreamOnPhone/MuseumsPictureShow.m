@@ -13,6 +13,7 @@
 #import "Scan_VC.h"
 #import "UMSocial.h"
 #import "UIImageView+WebCache.h"
+#import "common.h"
 
 @interface MuseumsPictureShow ()<passvalueDelegate,passvalueFromSaoMiaoDelegate>
 
@@ -52,6 +53,7 @@
     
     //设置右barbutton
     UIImage *image = [UIImage imageNamed:@"Share.png"];
+    
     UIButton *myCustomButton = [UIButton buttonWithType:UIButtonTypeCustom];
     myCustomButton.bounds = CGRectMake( 0, 0, image.size.width, image.size.height );
     [myCustomButton setImage:image forState:UIControlStateNormal];
@@ -62,7 +64,10 @@
 
 -(void)share
 {
-    NSString *shareText = _story;             //分享内嵌文字
+    NSString *shareText = _story;
+    
+     NSString *shareUrl = [NSString stringWithFormat:@"%@%@",SHARE_URL,self.ider];
+    //分享内嵌文字
 //    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:_imageUrl]];
     UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_imageUrl]]];
     
@@ -75,10 +80,12 @@
                                          appKey:@"55fcee3ce0f55a4ccb006a88"
                                       shareText:shareText
                                      shareImage:image
-                                shareToSnsNames:nil
+                                shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite,UMShareToSina,UMShareToTencent,UMShareToSms]
                                        delegate:nil];
     
+    [UMSocialData defaultData].extConfig.wechatSessionData.url =shareUrl;
     
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = shareUrl;
 }
 -(void)viewWillAppear:(BOOL)animated
 {

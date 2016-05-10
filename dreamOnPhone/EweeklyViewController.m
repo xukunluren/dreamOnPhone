@@ -23,10 +23,21 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
-    [userdefaults removeObjectForKey:@"number"];
-    int number = 3;
-    [userdefaults setInteger:number forKey:@"number"];
+//    NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+//    [userdefaults removeObjectForKey:@"number"];
+//    int number = 3;
+//    [userdefaults setInteger:number forKey:@"number"];
+    
+    self.tabBarController.tabBar.hidden = YES;
+    [self.tabBarController.view subviews].lastObject.hidden = YES;
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    self.tabBarController.tabBar.hidden = NO;
+    [self.tabBarController.view subviews].lastObject.hidden = NO;
+    
 }
 
 - (void)viewDidLoad {
@@ -54,13 +65,46 @@
     
     
     UIBarButtonItem *rightbar = [[UIBarButtonItem alloc] initWithCustomView:myCustomButton];
+
     
+    
+    //设置右barbutton
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 60, 30)];
+    
+    UIImage *image1 = [UIImage imageNamed:@"back@2x.png"];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(-10, 0, 30, 30)];
+    imageView.image = image1;
+    imageView.contentMode = UIViewContentModeScaleToFill;
+    [view addSubview:imageView];
+
+    UIButton *leftCustomButton = [[UIButton alloc] initWithFrame:CGRectMake(20, 0, 40, 30)];
+    [leftCustomButton setTitle:@"返回" forState:UIControlStateNormal];
+    [leftCustomButton.titleLabel setTextColor:[UIColor whiteColor]];
+    leftCustomButton.titleLabel.font = [UIFont systemFontOfSize:16.0];
+    [leftCustomButton addTarget:self action:@selector(backToOtherView) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:leftCustomButton];
+    
+    
+    UIBarButtonItem *leftbar = [[UIBarButtonItem alloc] initWithCustomView:view];
+
     self.navigationItem.rightBarButtonItem = rightbar;
+       self.navigationItem.leftBarButtonItem = leftbar;
+//    [self.navigationItem setLeftBarButtonItems:[NSArray arrayWithObjects:left1,leftbar, nil]];
     [self setWebView];
     
    
 }
--(void)setWebView 
+
+-(void)backToOtherView
+{
+    NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+    NSInteger iii = [userdefaults integerForKey:@"number"];
+    NSLog(@"%ld",(long)iii);
+    [self.tabBarController setSelectedIndex:iii];
+    
+}
+-(void)setWebView
 {
     _eweeklyWeb = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
 //    NSString *url = _urlArray.firstObject;

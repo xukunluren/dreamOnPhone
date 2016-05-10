@@ -129,13 +129,14 @@
     
     cell.backgroundColor = [UIColor colorWithRed:230.0/255.0 green:230.0/255.0 blue:230.0/255.0 alpha:1.0];
 
-    NSString *titleText = [NSString stringWithFormat:@"%@",_nameArray[indexPath.row]];
+    NSString *titleText = [NSString stringWithFormat:@"  %@",_nameArray[indexPath.row]];
     cell.title.text = titleText;
     cell.museumName.text = [NSString stringWithFormat:@"- %@",_titleArray[indexPath.row]];
-    cell.detailTitle.text = [NSString stringWithFormat:@"%@",_descriptionArray[indexPath.row]];
+    cell.detailTitle.text = [NSString stringWithFormat:@"  %@",_descriptionArray[indexPath.row]];
     cell.datelable.text = _timeArray[indexPath.row];
     NSString *image = _coverImage[indexPath.row];
     NSURL *url = [NSURL URLWithString:image];
+//    [cell.image sd_setImageWithURL:url];
     [cell.image sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"loading.jpg"]];
     return cell;
 }

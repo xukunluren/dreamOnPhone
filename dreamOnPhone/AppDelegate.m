@@ -45,6 +45,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
     int number = 0;
     [userdefaults setInteger:number  forKey:@"number"];

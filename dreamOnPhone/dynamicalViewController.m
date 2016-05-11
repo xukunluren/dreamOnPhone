@@ -80,7 +80,7 @@
     
     UIBarButtonItem *rightbar = [[UIBarButtonItem alloc] initWithCustomView:myCustomButton];
     
-    self.navigationItem.rightBarButtonItem = rightbar;
+//    self.navigationItem.rightBarButtonItem = rightbar;
     
 }
 

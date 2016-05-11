@@ -1,22 +1,22 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "43613A6AC7870DF5E3624B271115BC628676BBD6+++76E1FF3",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "43613A6AC7870DF5E3624B271115BC628676BBD6+++44EE3FF",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "47332947DF057E9FA914DBB5CC84587E71CD5F50+++D1B4F55" : 0,
     "47332947DF057E9FA914DBB5CC84587E71CD5F50+++7AD6632" : 0,
-    "43613A6AC7870DF5E3624B271115BC628676BBD6+++76E1FF3" : 0,
     "BC6B0FA7D790DC1CCAAA33C3129128C7E6B00FA7+++3C61E28" : 0,
-    "BC6B0FA7D790DC1CCAAA33C3129128C7E6B00FA7+++52B91F4" : 0
+    "BC6B0FA7D790DC1CCAAA33C3129128C7E6B00FA7+++52B91F4" : 0,
+    "43613A6AC7870DF5E3624B271115BC628676BBD6+++44EE3FF" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "1950ECB1-31CD-4EFF-9260-9C1CEC4CF888",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "47332947DF057E9FA914DBB5CC84587E71CD5F50+++D1B4F55" : "",
     "47332947DF057E9FA914DBB5CC84587E71CD5F50+++7AD6632" : "",
-    "43613A6AC7870DF5E3624B271115BC628676BBD6+++76E1FF3" : "dreamOnPhone\/",
     "BC6B0FA7D790DC1CCAAA33C3129128C7E6B00FA7+++3C61E28" : "DreamOnPhone0412\/",
-    "BC6B0FA7D790DC1CCAAA33C3129128C7E6B00FA7+++52B91F4" : "DreamOnPh\/"
+    "BC6B0FA7D790DC1CCAAA33C3129128C7E6B00FA7+++52B91F4" : "DreamOnPh\/",
+    "43613A6AC7870DF5E3624B271115BC628676BBD6+++44EE3FF" : "dreamOnPhone\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "dreamOnPhone",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -25,7 +25,7 @@
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/xukunluren\/dreamOnPhone.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "43613A6AC7870DF5E3624B271115BC628676BBD6+++76E1FF3"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "43613A6AC7870DF5E3624B271115BC628676BBD6+++44EE3FF"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:xukunluren\/dreamOnPhone.git",

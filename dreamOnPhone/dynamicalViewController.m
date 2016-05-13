@@ -236,7 +236,13 @@
     NSString *time1;
     
     title = [museummmm objectForKey:@"name"];
-    time1 = [object objectForKey:@"created_at"];
+    
+    if ([_tag isEqualToString:@"1"]) {
+    time1 = [object objectForKey:@"content"];
+    }else
+    {
+    time1 = [object objectForKey:@"content"];
+    }
     
     if (time1 == nil || time1 == NULL) {
         time1 = @"----：--T-";

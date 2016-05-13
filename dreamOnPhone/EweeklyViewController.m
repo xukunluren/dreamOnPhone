@@ -162,7 +162,7 @@
                                          appKey:@"55fcee3ce0f55a4ccb006a88"
                                       shareText:shareText
                                      shareImage:nil
-                                shareToSnsNames:nil
+                                shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline,UMShareToWechatFavorite,UMShareToSina,UMShareToTencent,UMShareToSms]
                                        delegate:nil];
     [UMSocialData defaultData].extConfig.wechatSessionData.url =shareText;
     

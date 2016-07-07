@@ -1628,7 +1628,7 @@
 				TargetAttributes = {
 					84E12CFB1B72F3A700A8D5A9 = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = F8APBYGXT3;
+						DevelopmentTeam = 5G6X7E2225;
 					};
 					84E12D171B72F3A700A8D5A9 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -2082,8 +2082,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Duob Siflaming (FS4CTB5VSA)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Duob Siflaming (FS4CTB5VSA)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2116,8 +2116,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Duob Siflaming (FS4CTB5VSA)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Duob Siflaming (FS4CTB5VSA)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
